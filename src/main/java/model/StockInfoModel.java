@@ -5,10 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StockInfoModel {
 
-/*    [{"IDSymbol":"76781","DateNo":"596","Symbol":"VET","TotalListingQtty":"16000000.000000","PriorOpenPrice":"59800","PriorClosePrice":"59800","SecurityType":"ST",
-            "IssueDate":"00010101-12:01:00","ReferenceStatus":"0","BasicPrice":"59800","SecurityTradingStatus":"0","ListingStatus":"0","CeilingPrice":"68700",
-            "FloorPrice":"50900","Parvalue":"10000","TradingSessionID":"UPC_CON_NML","TradSecStatus":"90","TradingDate":"20200429","Time":"07:51:54","TradingUnit":"100",
-            "BoardCode":"UPC_BRD_01","RemainForeignQtty":"7831500"}]*/
     private String IDSymbol;
     private String Symbol;
     private String BoardCode;
