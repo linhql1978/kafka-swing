@@ -38,7 +38,7 @@ public class ConsumerConfig {
 
     public void listen(KafkaConsumer consumer, App app) {
         while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(0));
             app.reRender(records);
         }
     }

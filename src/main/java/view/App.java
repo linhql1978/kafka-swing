@@ -1,7 +1,9 @@
 package view;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import comsumer.ReadThread;
+import custom.messages.StockInfo;
 import model.StockInfoModel;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -9,52 +11,93 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class App extends javax.swing.JFrame {
     private static List<StockInfoModel> data;
-    ArrayList arrCols = new ArrayList();
-    DefaultTableModel model = new DefaultTableModel();
+    ArrayList arrCols;
+    DefaultTableModel model;
+
+    private Map<Integer, String> difference(StockInfoModel s1, StockInfoModel s2) {
+        Map<Integer, String> fields = new HashMap<>();
+        int index = 0;
+        for(Field field: StockInfoModel.class.getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                String valueS1 = field.get(s1).toString();
+                String valueS2 = field.get(s2).toString();
+                if (!valueS1.equals(valueS2)) {
+                    fields.put(index, valueS2);
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            index ++;
+        }
+        return fields;
+    }
 
     public void reRender(ConsumerRecords<String, String> records) {
-        Gson gson = new Gson();
-        for (ConsumerRecord<String, String> item : records) {
-            try {
+        try {
+            Gson gson = new Gson();
+            Map<Integer, String> fields = new HashMap<>();
+            int size = -1, temp = -1, indexChange = -1;
+            for (ConsumerRecord<String, String> item : records) {
                 StockInfoModel object = gson.fromJson(item.value().substring(1, item.value().length() - 1), StockInfoModel.class);
                 boolean check = false;
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(i).getSymbol().equals(object.getSymbol())) {
-                        data.set(i, object);
+                        fields = difference(data.get(i), object);
+                        if (!fields.isEmpty()) {
+                            data.set(i, object);
+                            indexChange = i;
+                        }
                         check = true;
                         break;
                     }
                 }
                 if (!check) {
                     data.add(object);
+                    size ++;
+                } else {
+                    int finalIndexChange = indexChange;
+                    fields.entrySet().stream().forEach(map ->{
+                        model.setValueAt(map.getValue(), finalIndexChange, map.getKey());
+                    });
                 }
-                model.setRowCount(0);
-                for (StockInfoModel stockInfoModel : data) {
+
+                if (size > temp) {
+                    StockInfoModel stockInfoModel = data.get(size);
+                    temp ++;
                     Object[] objects = {
-                            stockInfoModel.getSymbolID(),
+                            stockInfoModel.getIDSymbol(),
                             stockInfoModel.getSymbol(),
                             stockInfoModel.getBoardCode(),
                             stockInfoModel.getTradingSessionID(),
+                            stockInfoModel.getTradSecStatus(),
                             stockInfoModel.getSecurityTradingStatus(),
                             stockInfoModel.getListingStatus()
                     };
                     model.addRow(objects);
                 }
                 tblReceiveMessage.setModel(model);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (JsonSyntaxException | ArrayIndexOutOfBoundsException e) {
+//            e.printStackTrace();
+        } catch (Exception e) {
+//            e.printStackTrace();
         }
     }
 
     public App() {
         initComponents();
         data = new ArrayList<>();
+        model = new DefaultTableModel();
+        arrCols = new ArrayList();
 
         arrCols.add("ID chứng khoán"); //IDSymbol
         arrCols.add("Mã chứng khoán"); //Symbol
