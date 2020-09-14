@@ -25,18 +25,19 @@ import quickfix.StringField;
 
 public class SecurityType extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 167;
-	
-	public static final String OPTION = "OPT";
-	public static final String FUTURE = "FUT";
-	public SecurityType() {
-		super(167);
-	}
+    public static final int FIELD = 167;
 
-	public SecurityType(String data) {
-		super(167, data);
-	}
-	
+    public static final String OPTION = "OPT";
+    public static final String FUTURE = "FUT";
+
+    public SecurityType() {
+        super(167);
+    }
+
+    public SecurityType(String data) {
+        super(167, data);
+    }
+
 }

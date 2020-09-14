@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class OpenQtty extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 804;
-	
-	public OpenQtty() {
-		super(804);
-	}
+    public static final int FIELD = 804;
 
-	public OpenQtty(double data) {
-		super(804, data);
-	}
-	
+    public OpenQtty() {
+        super(804);
+    }
+
+    public OpenQtty(double data) {
+        super(804, data);
+    }
+
 }

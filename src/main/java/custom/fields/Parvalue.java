@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class Parvalue extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 334;
-	
-	public Parvalue() {
-		super(334);
-	}
+    public static final int FIELD = 334;
 
-	public Parvalue(int data) {
-		super(334, data);
-	}
-	
+    public Parvalue() {
+        super(334);
+    }
+
+    public Parvalue(int data) {
+        super(334, data);
+    }
+
 }

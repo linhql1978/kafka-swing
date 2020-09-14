@@ -5,17 +5,17 @@ import view.App;
 
 public class ReadThread extends Thread {
     private KafkaConsumer consumer;
-    private Config config;
+    private ConsumerConfig consumerConfig;
     private App app;
 
     public ReadThread(App app) {
         this.app = app;
-        config = new Config();
-        consumer = config.create();
+        consumerConfig = new ConsumerConfig();
+        consumer = consumerConfig.create();
     }
 
     @Override
     public void run() {
-       config.listen(consumer, app);
+        consumerConfig.listen(consumer, app);
     }
 }

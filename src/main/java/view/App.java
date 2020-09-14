@@ -34,7 +34,6 @@ public class App extends javax.swing.JFrame {
                 }
                 if (!check) {
                     data.add(object);
-                    System.out.println("Add: " + object);
                 }
                 model.setRowCount(0);
                 for (StockInfoModel stockInfoModel : data) {
@@ -233,8 +232,8 @@ public class App extends javax.swing.JFrame {
                 app.setVisible(true);
                 app.setLocationRelativeTo(null);
 
-                ReadThread rt = new ReadThread(app);
-                rt.start();
+                ReadThread readThread = new ReadThread(app);
+                readThread.start();
             }
         });
     }

@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class OpenPrice extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 137;
-	
-	public OpenPrice() {
-		super(137);
-	}
+    public static final int FIELD = 137;
 
-	public OpenPrice(double data) {
-		super(137, data);
-	}
-	
+    public OpenPrice() {
+        super(137);
+    }
+
+    public OpenPrice(double data) {
+        super(137, data);
+    }
+
 }

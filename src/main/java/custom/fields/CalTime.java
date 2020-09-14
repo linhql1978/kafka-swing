@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class CalTime extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 4;
-	
-	public CalTime() {
-		super(4);
-	}
+    public static final int FIELD = 4;
 
-	public CalTime(String data) {
-		super(4, data);
-	}
-	
+    public CalTime() {
+        super(4);
+    }
+
+    public CalTime(String data) {
+        super(4, data);
+    }
+
 }

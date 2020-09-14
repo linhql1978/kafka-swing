@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class FloorPricePT extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 3331;
-	
-	public FloorPricePT() {
-		super(3331);
-	}
+    public static final int FIELD = 3331;
 
-	public FloorPricePT(int data) {
-		super(3331, data);
-	}
-	
+    public FloorPricePT() {
+        super(3331);
+    }
+
+    public FloorPricePT(int data) {
+        super(3331, data);
+    }
+
 }

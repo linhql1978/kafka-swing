@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class Issuer extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 106;
-	
-	public Issuer() {
-		super(106);
-	}
+    public static final int FIELD = 106;
 
-	public Issuer(String data) {
-		super(106, data);
-	}
-	
+    public Issuer() {
+        super(106);
+    }
+
+    public Issuer(String data) {
+        super(106, data);
+    }
+
 }

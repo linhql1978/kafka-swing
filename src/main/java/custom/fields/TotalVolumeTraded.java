@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class TotalVolumeTraded extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 387;
-	
-	public TotalVolumeTraded() {
-		super(387);
-	}
+    public static final int FIELD = 387;
 
-	public TotalVolumeTraded(double data) {
-		super(387, data);
-	}
-	
+    public TotalVolumeTraded() {
+        super(387);
+    }
+
+    public TotalVolumeTraded(double data) {
+        super(387, data);
+    }
+
 }

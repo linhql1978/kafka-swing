@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class SellCount extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 3962;
-	
-	public SellCount() {
-		super(3962);
-	}
+    public static final int FIELD = 3962;
 
-	public SellCount(double data) {
-		super(3962, data);
-	}
-	
+    public SellCount() {
+        super(3962);
+    }
+
+    public SellCount(double data) {
+        super(3962, data);
+    }
+
 }

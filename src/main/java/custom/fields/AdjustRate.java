@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class AdjustRate extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 233;
-	
-	public AdjustRate() {
-		super(233);
-	}
+    public static final int FIELD = 233;
 
-	public AdjustRate(int data) {
-		super(233, data);
-	}
-	
+    public AdjustRate() {
+        super(233);
+    }
+
+    public AdjustRate(int data) {
+        super(233, data);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class CouponRate extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 223;
-	
-	public CouponRate() {
-		super(223);
-	}
+    public static final int FIELD = 223;
 
-	public CouponRate(double data) {
-		super(223, data);
-	}
-	
+    public CouponRate() {
+        super(223);
+    }
+
+    public CouponRate(double data) {
+        super(223, data);
+    }
+
 }

@@ -25,60 +25,60 @@ import quickfix.Group;
 
 public class MessageFactory implements quickfix.MessageFactory {
 
-	public Message create(String beginString, String msgType) {
-		
-		switch (msgType) {
-	
-			case custom.messages.Heartbeat.MSGTYPE:
-				return new custom.messages.Heartbeat();
-	
-			case custom.messages.Logon.MSGTYPE:
-				return new custom.messages.Logon();
-	
-			case custom.messages.AutionMatch.MSGTYPE:
-				return new custom.messages.AutionMatch();
-	
-			case custom.messages.BoardInfo.MSGTYPE:
-				return new custom.messages.BoardInfo();
-	
-			case custom.messages.DerivativesInfo.MSGTYPE:
-				return new custom.messages.DerivativesInfo();
-	
-			case custom.messages.Index.MSGTYPE:
-				return new custom.messages.Index();
-	
-			case custom.messages.Stock.MSGTYPE:
-				return new custom.messages.Stock();
-	
-			case custom.messages.StockInfo.MSGTYPE:
-				return new custom.messages.StockInfo();
-	
-			case custom.messages.TopNPrice.MSGTYPE:
-				return new custom.messages.TopNPrice();
-	
-			case custom.messages.TopPriceOddLot.MSGTYPE:
-				return new custom.messages.TopPriceOddLot();
-	
-		}
+    public Message create(String beginString, String msgType) {
 
-		return new custom.messages.Message();
-	}
+        switch (msgType) {
 
-	public Group create(String beginString, String msgType, int correspondingFieldID) {
-		
-		switch (msgType) {
-	
-			case custom.messages.TopNPrice.MSGTYPE:
-				switch (correspondingFieldID) {
-			
-				case custom.fields.NoTopPrice.FIELD:
-					return new custom.messages.TopNPrice.NoTopPrice();
-	
-				}
-				break;
-	
-		}
+            case custom.messages.Heartbeat.MSGTYPE:
+                return new custom.messages.Heartbeat();
 
-		return null;
-	}
+            case custom.messages.Logon.MSGTYPE:
+                return new custom.messages.Logon();
+
+            case custom.messages.AutionMatch.MSGTYPE:
+                return new custom.messages.AutionMatch();
+
+            case custom.messages.BoardInfo.MSGTYPE:
+                return new custom.messages.BoardInfo();
+
+            case custom.messages.DerivativesInfo.MSGTYPE:
+                return new custom.messages.DerivativesInfo();
+
+            case custom.messages.Index.MSGTYPE:
+                return new custom.messages.Index();
+
+            case custom.messages.Stock.MSGTYPE:
+                return new custom.messages.Stock();
+
+            case custom.messages.StockInfo.MSGTYPE:
+                return new custom.messages.StockInfo();
+
+            case custom.messages.TopNPrice.MSGTYPE:
+                return new custom.messages.TopNPrice();
+
+            case custom.messages.TopPriceOddLot.MSGTYPE:
+                return new custom.messages.TopPriceOddLot();
+
+        }
+
+        return new custom.messages.Message();
+    }
+
+    public Group create(String beginString, String msgType, int correspondingFieldID) {
+
+        switch (msgType) {
+
+            case custom.messages.TopNPrice.MSGTYPE:
+                switch (correspondingFieldID) {
+
+                    case custom.fields.NoTopPrice.FIELD:
+                        return new custom.messages.TopNPrice.NoTopPrice();
+
+                }
+                break;
+
+        }
+
+        return null;
+    }
 }

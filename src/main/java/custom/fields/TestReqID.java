@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class TestReqID extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 112;
-	
-	public TestReqID() {
-		super(112);
-	}
+    public static final int FIELD = 112;
 
-	public TestReqID(String data) {
-		super(112, data);
-	}
-	
+    public TestReqID() {
+        super(112);
+    }
+
+    public TestReqID(String data) {
+        super(112, data);
+    }
+
 }

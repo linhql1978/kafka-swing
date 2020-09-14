@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class NumTopPrice extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 556;
-	
-	public NumTopPrice() {
-		super(556);
-	}
+    public static final int FIELD = 556;
 
-	public NumTopPrice(int data) {
-		super(556, data);
-	}
-	
+    public NumTopPrice() {
+        super(556);
+    }
+
+    public NumTopPrice(int data) {
+        super(556, data);
+    }
+
 }

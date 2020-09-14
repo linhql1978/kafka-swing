@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class TotalBuyTradingValue extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 396;
-	
-	public TotalBuyTradingValue() {
-		super(396);
-	}
+    public static final int FIELD = 396;
 
-	public TotalBuyTradingValue(String data) {
-		super(396, data);
-	}
-	
+    public TotalBuyTradingValue() {
+        super(396);
+    }
+
+    public TotalBuyTradingValue(String data) {
+        super(396, data);
+    }
+
 }

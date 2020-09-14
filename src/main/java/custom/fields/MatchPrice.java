@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class MatchPrice extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 31;
-	
-	public MatchPrice() {
-		super(31);
-	}
+    public static final int FIELD = 31;
 
-	public MatchPrice(double data) {
-		super(31, data);
-	}
-	
+    public MatchPrice() {
+        super(31);
+    }
+
+    public MatchPrice(double data) {
+        super(31, data);
+    }
+
 }

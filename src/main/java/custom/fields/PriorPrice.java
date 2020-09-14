@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class PriorPrice extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 277;
-	
-	public PriorPrice() {
-		super(277);
-	}
+    public static final int FIELD = 277;
 
-	public PriorPrice(int data) {
-		super(277, data);
-	}
-	
+    public PriorPrice() {
+        super(277);
+    }
+
+    public PriorPrice(int data) {
+        super(277, data);
+    }
+
 }

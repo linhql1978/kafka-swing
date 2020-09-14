@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class TradSecStatus extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 340;
-	
-	public TradSecStatus() {
-		super(340);
-	}
+    public static final int FIELD = 340;
 
-	public TradSecStatus(int data) {
-		super(340, data);
-	}
-	
+    public TradSecStatus() {
+        super(340);
+    }
+
+    public TradSecStatus(int data) {
+        super(340, data);
+    }
+
 }

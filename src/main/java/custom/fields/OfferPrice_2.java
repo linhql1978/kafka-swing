@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class OfferPrice_2 extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 136;
-	
-	public OfferPrice_2() {
-		super(136);
-	}
+    public static final int FIELD = 136;
 
-	public OfferPrice_2(String data) {
-		super(136, data);
-	}
-	
+    public OfferPrice_2() {
+        super(136);
+    }
+
+    public OfferPrice_2(String data) {
+        super(136, data);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class BidCount extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 321;
-	
-	public BidCount() {
-		super(321);
-	}
+    public static final int FIELD = 321;
 
-	public BidCount(double data) {
-		super(321, data);
-	}
-	
+    public BidCount() {
+        super(321);
+    }
+
+    public BidCount(double data) {
+        super(321, data);
+    }
+
 }

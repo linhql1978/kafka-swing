@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Properties;
 
 
-public class Config {
+public class ConsumerConfig {
     public KafkaConsumer create() {
         String bootstrapServers = "13.76.157.231:9092,20.184.4.77:9092,104.42.73.42:9092";
         String grp_id = String.valueOf((new Date().hashCode()));
@@ -35,6 +35,7 @@ public class Config {
 
         return consumer;
     }
+
     public void listen(KafkaConsumer consumer, App app) {
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
@@ -42,5 +43,4 @@ public class Config {
             app.reRender(records);
         }
     }
-
 }

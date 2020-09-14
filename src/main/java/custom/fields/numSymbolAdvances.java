@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class numSymbolAdvances extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 251;
-	
-	public numSymbolAdvances() {
-		super(251);
-	}
+    public static final int FIELD = 251;
 
-	public numSymbolAdvances(int data) {
-		super(251, data);
-	}
-	
+    public numSymbolAdvances() {
+        super(251);
+    }
+
+    public numSymbolAdvances(int data) {
+        super(251, data);
+    }
+
 }

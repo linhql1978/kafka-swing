@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class CloseIndex extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 26;
-	
-	public CloseIndex() {
-		super(26);
-	}
+    public static final int FIELD = 26;
 
-	public CloseIndex(double data) {
-		super(26, data);
-	}
-	
+    public CloseIndex() {
+        super(26);
+    }
+
+    public CloseIndex(double data) {
+        super(26, data);
+    }
+
 }
