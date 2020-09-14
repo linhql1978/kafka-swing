@@ -12,19 +12,6 @@ public class StockInfoModel {
     private String SecurityTradingStatus;
     private String ListingStatus;
 
-    @Override
-    public String toString() {
-        return "StockInfoModel{" +
-                "SymbolID='" + SymbolID + '\'' +
-                ", Symbol='" + Symbol + '\'' +
-                ", BoardCode='" + BoardCode + '\'' +
-                ", TradingSessionID='" + TradingSessionID + '\'' +
-                ", TradeSesStatus='" + TradeSesStatus + '\'' +
-                ", SecurityTradingStatus='" + SecurityTradingStatus + '\'' +
-                ", ListingStatus='" + ListingStatus + '\'' +
-                '}';
-    }
-
     public String getSymbolID() {
         return SymbolID;
     }

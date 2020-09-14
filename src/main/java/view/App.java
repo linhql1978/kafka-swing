@@ -1,22 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import com.google.gson.Gson;
-import comsumer.Config;
 import comsumer.ReadThread;
 import model.StockInfoModel;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,30 +27,29 @@ public class App extends javax.swing.JFrame {
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(i).getSymbol().equals(object.getSymbol())) {
                         data.set(i, object);
-                        System.out.println("Update:"+ object);
+                        System.out.println("Update:" + object);
                         check = true;
                         break;
                     }
                 }
                 if (!check) {
-//                System.out.println(object.getSymbol());
                     data.add(object);
                     System.out.println("Add: " + object);
                 }
                 model.setRowCount(0);
-                for (StockInfoModel st : data) {
+                for (StockInfoModel stockInfoModel : data) {
                     Object[] objects = {
-                            st.getSymbolID(),
-                            st.getSymbol(),
-                            st.getBoardCode(),
-                            st.getTradingSessionID(),
-                            st.getSecurityTradingStatus(),
-                            st.getListingStatus()
+                            stockInfoModel.getSymbolID(),
+                            stockInfoModel.getSymbol(),
+                            stockInfoModel.getBoardCode(),
+                            stockInfoModel.getTradingSessionID(),
+                            stockInfoModel.getSecurityTradingStatus(),
+                            stockInfoModel.getListingStatus()
                     };
                     model.addRow(objects);
                 }
                 tblReceiveMessage.setModel(model);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -76,18 +67,6 @@ public class App extends javax.swing.JFrame {
         arrCols.add("Trạng thái chứng khoán");//SecurityTradingStatus
         arrCols.add("Tình trạng chứng khoán");//ListingStatus
         model.setColumnIdentifiers(arrCols.toArray());
-    }
-
-    public void startConsumer() {
-        Config config = new Config();
-        KafkaConsumer consumer = config.create();
-        Gson gson = new Gson();
-        while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-            records.forEach(item -> {
-
-            });
-        }
     }
 
     @SuppressWarnings("unchecked")
