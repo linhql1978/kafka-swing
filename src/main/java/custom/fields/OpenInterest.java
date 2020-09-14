@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class OpenInterest extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 801;
-	
-	public OpenInterest() {
-		super(801);
-	}
+    public static final int FIELD = 801;
 
-	public OpenInterest(double data) {
-		super(801, data);
-	}
-	
+    public OpenInterest() {
+        super(801);
+    }
+
+    public OpenInterest(double data) {
+        super(801, data);
+    }
+
 }

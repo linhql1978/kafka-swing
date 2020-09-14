@@ -20,207 +20,207 @@
 package custom.messages;
 
 import quickfix.FieldNotFound;
-  
+
 import quickfix.field.*;
 
 
 public class Message extends quickfix.Message {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public Message() {
-		this(null);
-	}
+    public Message() {
+        this(null);
+    }
 
-	protected Message(int[] fieldOrder) {
-		super(fieldOrder);
-		
-		getHeader().setField(new BeginString("FIX.4.4"));
-			
-	}
+    protected Message(int[] fieldOrder) {
+        super(fieldOrder);
+
+        getHeader().setField(new BeginString("FIX.4.4"));
+
+    }
 
     @Override
     protected Header newHeader() {
         return new Header(this);
     }
 
-	public static class Header extends quickfix.Message.Header {
+    public static class Header extends quickfix.Message.Header {
 
-		static final long serialVersionUID = 20050617;
+        static final long serialVersionUID = 20050617;
 
-		public Header(Message msg) {
-			// JNI compatibility
-		}
-		
-	public void set(custom.fields.BeginString value) {
-		setField(value);
-	}
+        public Header(Message msg) {
+            // JNI compatibility
+        }
 
-	public custom.fields.BeginString get(custom.fields.BeginString value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+        public void set(custom.fields.BeginString value) {
+            setField(value);
+        }
 
-	public custom.fields.BeginString getBeginString() throws FieldNotFound {
-		return get(new custom.fields.BeginString());
-	}
+        public custom.fields.BeginString get(custom.fields.BeginString value) throws FieldNotFound {
+            getField(value);
+            return value;
+        }
 
-	public boolean isSet(custom.fields.BeginString field) {
-		return isSetField(field);
-	}
+        public custom.fields.BeginString getBeginString() throws FieldNotFound {
+            return get(new custom.fields.BeginString());
+        }
 
-	public boolean isSetBeginString() {
-		return isSetField(8);
-	}
+        public boolean isSet(custom.fields.BeginString field) {
+            return isSetField(field);
+        }
 
-	public void set(custom.fields.BodyLength value) {
-		setField(value);
-	}
+        public boolean isSetBeginString() {
+            return isSetField(8);
+        }
 
-	public custom.fields.BodyLength get(custom.fields.BodyLength value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+        public void set(custom.fields.BodyLength value) {
+            setField(value);
+        }
 
-	public custom.fields.BodyLength getBodyLength() throws FieldNotFound {
-		return get(new custom.fields.BodyLength());
-	}
+        public custom.fields.BodyLength get(custom.fields.BodyLength value) throws FieldNotFound {
+            getField(value);
+            return value;
+        }
 
-	public boolean isSet(custom.fields.BodyLength field) {
-		return isSetField(field);
-	}
+        public custom.fields.BodyLength getBodyLength() throws FieldNotFound {
+            return get(new custom.fields.BodyLength());
+        }
 
-	public boolean isSetBodyLength() {
-		return isSetField(9);
-	}
+        public boolean isSet(custom.fields.BodyLength field) {
+            return isSetField(field);
+        }
 
-	public void set(custom.fields.MsgType value) {
-		setField(value);
-	}
+        public boolean isSetBodyLength() {
+            return isSetField(9);
+        }
 
-	public custom.fields.MsgType get(custom.fields.MsgType value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+        public void set(custom.fields.MsgType value) {
+            setField(value);
+        }
 
-	public custom.fields.MsgType getMsgType() throws FieldNotFound {
-		return get(new custom.fields.MsgType());
-	}
+        public custom.fields.MsgType get(custom.fields.MsgType value) throws FieldNotFound {
+            getField(value);
+            return value;
+        }
 
-	public boolean isSet(custom.fields.MsgType field) {
-		return isSetField(field);
-	}
+        public custom.fields.MsgType getMsgType() throws FieldNotFound {
+            return get(new custom.fields.MsgType());
+        }
 
-	public boolean isSetMsgType() {
-		return isSetField(35);
-	}
+        public boolean isSet(custom.fields.MsgType field) {
+            return isSetField(field);
+        }
 
-	public void set(custom.fields.SenderCompID value) {
-		setField(value);
-	}
+        public boolean isSetMsgType() {
+            return isSetField(35);
+        }
 
-	public custom.fields.SenderCompID get(custom.fields.SenderCompID value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+        public void set(custom.fields.SenderCompID value) {
+            setField(value);
+        }
 
-	public custom.fields.SenderCompID getSenderCompID() throws FieldNotFound {
-		return get(new custom.fields.SenderCompID());
-	}
+        public custom.fields.SenderCompID get(custom.fields.SenderCompID value) throws FieldNotFound {
+            getField(value);
+            return value;
+        }
 
-	public boolean isSet(custom.fields.SenderCompID field) {
-		return isSetField(field);
-	}
+        public custom.fields.SenderCompID getSenderCompID() throws FieldNotFound {
+            return get(new custom.fields.SenderCompID());
+        }
 
-	public boolean isSetSenderCompID() {
-		return isSetField(49);
-	}
+        public boolean isSet(custom.fields.SenderCompID field) {
+            return isSetField(field);
+        }
 
-	public void set(custom.fields.SendingTime value) {
-		setField(value);
-	}
+        public boolean isSetSenderCompID() {
+            return isSetField(49);
+        }
 
-	public custom.fields.SendingTime get(custom.fields.SendingTime value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+        public void set(custom.fields.SendingTime value) {
+            setField(value);
+        }
 
-	public custom.fields.SendingTime getSendingTime() throws FieldNotFound {
-		return get(new custom.fields.SendingTime());
-	}
+        public custom.fields.SendingTime get(custom.fields.SendingTime value) throws FieldNotFound {
+            getField(value);
+            return value;
+        }
 
-	public boolean isSet(custom.fields.SendingTime field) {
-		return isSetField(field);
-	}
+        public custom.fields.SendingTime getSendingTime() throws FieldNotFound {
+            return get(new custom.fields.SendingTime());
+        }
 
-	public boolean isSetSendingTime() {
-		return isSetField(52);
-	}
+        public boolean isSet(custom.fields.SendingTime field) {
+            return isSetField(field);
+        }
 
-	}
-	
-	
-	public void set(custom.fields.SignatureLength value) {
-		setField(value);
-	}
+        public boolean isSetSendingTime() {
+            return isSetField(52);
+        }
 
-	public custom.fields.SignatureLength get(custom.fields.SignatureLength value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    }
 
-	public custom.fields.SignatureLength getSignatureLength() throws FieldNotFound {
-		return get(new custom.fields.SignatureLength());
-	}
 
-	public boolean isSet(custom.fields.SignatureLength field) {
-		return isSetField(field);
-	}
+    public void set(custom.fields.SignatureLength value) {
+        setField(value);
+    }
 
-	public boolean isSetSignatureLength() {
-		return isSetField(93);
-	}
+    public custom.fields.SignatureLength get(custom.fields.SignatureLength value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
 
-	public void set(custom.fields.Signature value) {
-		setField(value);
-	}
+    public custom.fields.SignatureLength getSignatureLength() throws FieldNotFound {
+        return get(new custom.fields.SignatureLength());
+    }
 
-	public custom.fields.Signature get(custom.fields.Signature value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    public boolean isSet(custom.fields.SignatureLength field) {
+        return isSetField(field);
+    }
 
-	public custom.fields.Signature getSignature() throws FieldNotFound {
-		return get(new custom.fields.Signature());
-	}
+    public boolean isSetSignatureLength() {
+        return isSetField(93);
+    }
 
-	public boolean isSet(custom.fields.Signature field) {
-		return isSetField(field);
-	}
+    public void set(custom.fields.Signature value) {
+        setField(value);
+    }
 
-	public boolean isSetSignature() {
-		return isSetField(89);
-	}
+    public custom.fields.Signature get(custom.fields.Signature value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
 
-	public void set(custom.fields.CheckSum value) {
-		setField(value);
-	}
+    public custom.fields.Signature getSignature() throws FieldNotFound {
+        return get(new custom.fields.Signature());
+    }
 
-	public custom.fields.CheckSum get(custom.fields.CheckSum value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    public boolean isSet(custom.fields.Signature field) {
+        return isSetField(field);
+    }
 
-	public custom.fields.CheckSum getCheckSum() throws FieldNotFound {
-		return get(new custom.fields.CheckSum());
-	}
+    public boolean isSetSignature() {
+        return isSetField(89);
+    }
 
-	public boolean isSet(custom.fields.CheckSum field) {
-		return isSetField(field);
-	}
+    public void set(custom.fields.CheckSum value) {
+        setField(value);
+    }
 
-	public boolean isSetCheckSum() {
-		return isSetField(10);
-	}
+    public custom.fields.CheckSum get(custom.fields.CheckSum value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
+
+    public custom.fields.CheckSum getCheckSum() throws FieldNotFound {
+        return get(new custom.fields.CheckSum());
+    }
+
+    public boolean isSet(custom.fields.CheckSum field) {
+        return isSetField(field);
+    }
+
+    public boolean isSetCheckSum() {
+        return isSetField(10);
+    }
 
 }

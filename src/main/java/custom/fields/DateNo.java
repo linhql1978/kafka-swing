@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class DateNo extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 17;
-	
-	public DateNo() {
-		super(17);
-	}
+    public static final int FIELD = 17;
 
-	public DateNo(int data) {
-		super(17, data);
-	}
-	
+    public DateNo() {
+        super(17);
+    }
+
+    public DateNo(int data) {
+        super(17, data);
+    }
+
 }

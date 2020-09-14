@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class CheckSum extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 10;
-	
-	public CheckSum() {
-		super(10);
-	}
+    public static final int FIELD = 10;
 
-	public CheckSum(String data) {
-		super(10, data);
-	}
-	
+    public CheckSum() {
+        super(10);
+    }
+
+    public CheckSum(String data) {
+        super(10, data);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.CharField;
 
 public class ActionType extends CharField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 33;
-	
-	public ActionType() {
-		super(33);
-	}
+    public static final int FIELD = 33;
 
-	public ActionType(char data) {
-		super(33, data);
-	}
-	
+    public ActionType() {
+        super(33);
+    }
+
+    public ActionType(char data) {
+        super(33, data);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class MaturityDate extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 541;
-	
-	public MaturityDate() {
-		super(541);
-	}
+    public static final int FIELD = 541;
 
-	public MaturityDate(double data) {
-		super(541, data);
-	}
-	
+    public MaturityDate() {
+        super(541);
+    }
+
+    public MaturityDate(double data) {
+        super(541, data);
+    }
+
 }

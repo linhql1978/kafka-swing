@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class Shortname extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 422;
-	
-	public Shortname() {
-		super(422);
-	}
+    public static final int FIELD = 422;
 
-	public Shortname(String data) {
-		super(422, data);
-	}
-	
+    public Shortname() {
+        super(422);
+    }
+
+    public Shortname(String data) {
+        super(422, data);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class BoardCode extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 425;
-	
-	public BoardCode() {
-		super(425);
-	}
+    public static final int FIELD = 425;
 
-	public BoardCode(String data) {
-		super(425, data);
-	}
-	
+    public BoardCode() {
+        super(425);
+    }
+
+    public BoardCode(String data) {
+        super(425, data);
+    }
+
 }

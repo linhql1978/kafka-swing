@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class SenderCompID extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 49;
-	
-	public SenderCompID() {
-		super(49);
-	}
+    public static final int FIELD = 49;
 
-	public SenderCompID(String data) {
-		super(49, data);
-	}
-	
+    public SenderCompID() {
+        super(49);
+    }
+
+    public SenderCompID(String data) {
+        super(49, data);
+    }
+
 }

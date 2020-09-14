@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class MarketCode extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 341;
-	
-	public MarketCode() {
-		super(341);
-	}
+    public static final int FIELD = 341;
 
-	public MarketCode(String data) {
-		super(341, data);
-	}
-	
+    public MarketCode() {
+        super(341);
+    }
+
+    public MarketCode(String data) {
+        super(341, data);
+    }
+
 }

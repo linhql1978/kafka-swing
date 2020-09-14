@@ -6,160 +6,160 @@ import quickfix.FieldNotFound;
 
 public class Stock extends Message {
 
-	static final long serialVersionUID = 20050617;
-	public static final String MSGTYPE = "S";
-	
+    static final long serialVersionUID = 20050617;
+    public static final String MSGTYPE = "S";
 
-	public Stock() {
-		super();
-		getHeader().setField(new custom.fields.MsgType(MSGTYPE));
-	}
-	
-	public void set(custom.fields.IDIndex value) {
-		setField(value);
-	}
 
-	public custom.fields.IDIndex get(custom.fields.IDIndex value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    public Stock() {
+        super();
+        getHeader().setField(new custom.fields.MsgType(MSGTYPE));
+    }
 
-	public custom.fields.IDIndex getIDIndex() throws FieldNotFound {
-		return get(new custom.fields.IDIndex());
-	}
+    public void set(custom.fields.IDIndex value) {
+        setField(value);
+    }
 
-	public boolean isSet(custom.fields.IDIndex field) {
-		return isSetField(field);
-	}
+    public custom.fields.IDIndex get(custom.fields.IDIndex value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
 
-	public boolean isSetIDIndex() {
-		return isSetField(1);
-	}
+    public custom.fields.IDIndex getIDIndex() throws FieldNotFound {
+        return get(new custom.fields.IDIndex());
+    }
 
-	public void set(custom.fields.IndexCode value) {
-		setField(value);
-	}
+    public boolean isSet(custom.fields.IDIndex field) {
+        return isSetField(field);
+    }
 
-	public custom.fields.IndexCode get(custom.fields.IndexCode value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    public boolean isSetIDIndex() {
+        return isSetField(1);
+    }
 
-	public custom.fields.IndexCode getIndexCode() throws FieldNotFound {
-		return get(new custom.fields.IndexCode());
-	}
+    public void set(custom.fields.IndexCode value) {
+        setField(value);
+    }
 
-	public boolean isSet(custom.fields.IndexCode field) {
-		return isSetField(field);
-	}
+    public custom.fields.IndexCode get(custom.fields.IndexCode value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
 
-	public boolean isSetIndexCode() {
-		return isSetField(2);
-	}
+    public custom.fields.IndexCode getIndexCode() throws FieldNotFound {
+        return get(new custom.fields.IndexCode());
+    }
 
-	public void set(custom.fields.IDSymbol value) {
-		setField(value);
-	}
+    public boolean isSet(custom.fields.IndexCode field) {
+        return isSetField(field);
+    }
 
-	public custom.fields.IDSymbol get(custom.fields.IDSymbol value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    public boolean isSetIndexCode() {
+        return isSetField(2);
+    }
 
-	public custom.fields.IDSymbol getIDSymbol() throws FieldNotFound {
-		return get(new custom.fields.IDSymbol());
-	}
+    public void set(custom.fields.IDSymbol value) {
+        setField(value);
+    }
 
-	public boolean isSet(custom.fields.IDSymbol field) {
-		return isSetField(field);
-	}
+    public custom.fields.IDSymbol get(custom.fields.IDSymbol value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
 
-	public boolean isSetIDSymbol() {
-		return isSetField(15);
-	}
+    public custom.fields.IDSymbol getIDSymbol() throws FieldNotFound {
+        return get(new custom.fields.IDSymbol());
+    }
 
-	public void set(custom.fields.Symbol value) {
-		setField(value);
-	}
+    public boolean isSet(custom.fields.IDSymbol field) {
+        return isSetField(field);
+    }
 
-	public custom.fields.Symbol get(custom.fields.Symbol value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    public boolean isSetIDSymbol() {
+        return isSetField(15);
+    }
 
-	public custom.fields.Symbol getSymbol() throws FieldNotFound {
-		return get(new custom.fields.Symbol());
-	}
+    public void set(custom.fields.Symbol value) {
+        setField(value);
+    }
 
-	public boolean isSet(custom.fields.Symbol field) {
-		return isSetField(field);
-	}
+    public custom.fields.Symbol get(custom.fields.Symbol value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
 
-	public boolean isSetSymbol() {
-		return isSetField(55);
-	}
+    public custom.fields.Symbol getSymbol() throws FieldNotFound {
+        return get(new custom.fields.Symbol());
+    }
 
-	public void set(custom.fields.TotalQtty value) {
-		setField(value);
-	}
+    public boolean isSet(custom.fields.Symbol field) {
+        return isSetField(field);
+    }
 
-	public custom.fields.TotalQtty get(custom.fields.TotalQtty value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    public boolean isSetSymbol() {
+        return isSetField(55);
+    }
 
-	public custom.fields.TotalQtty getTotalQtty() throws FieldNotFound {
-		return get(new custom.fields.TotalQtty());
-	}
+    public void set(custom.fields.TotalQtty value) {
+        setField(value);
+    }
 
-	public boolean isSet(custom.fields.TotalQtty field) {
-		return isSetField(field);
-	}
+    public custom.fields.TotalQtty get(custom.fields.TotalQtty value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
 
-	public boolean isSetTotalQtty() {
-		return isSetField(11);
-	}
+    public custom.fields.TotalQtty getTotalQtty() throws FieldNotFound {
+        return get(new custom.fields.TotalQtty());
+    }
 
-	public void set(custom.fields.Weighted value) {
-		setField(value);
-	}
+    public boolean isSet(custom.fields.TotalQtty field) {
+        return isSetField(field);
+    }
 
-	public custom.fields.Weighted get(custom.fields.Weighted value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    public boolean isSetTotalQtty() {
+        return isSetField(11);
+    }
 
-	public custom.fields.Weighted getWeighted() throws FieldNotFound {
-		return get(new custom.fields.Weighted());
-	}
+    public void set(custom.fields.Weighted value) {
+        setField(value);
+    }
 
-	public boolean isSet(custom.fields.Weighted field) {
-		return isSetField(field);
-	}
+    public custom.fields.Weighted get(custom.fields.Weighted value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
 
-	public boolean isSetWeighted() {
-		return isSetField(12);
-	}
+    public custom.fields.Weighted getWeighted() throws FieldNotFound {
+        return get(new custom.fields.Weighted());
+    }
 
-	public void set(custom.fields.AddDate value) {
-		setField(value);
-	}
+    public boolean isSet(custom.fields.Weighted field) {
+        return isSetField(field);
+    }
 
-	public custom.fields.AddDate get(custom.fields.AddDate value) throws FieldNotFound {
-		getField(value);
-		return value;
-	}
+    public boolean isSetWeighted() {
+        return isSetField(12);
+    }
 
-	public custom.fields.AddDate getAddDate() throws FieldNotFound {
-		return get(new custom.fields.AddDate());
-	}
+    public void set(custom.fields.AddDate value) {
+        setField(value);
+    }
 
-	public boolean isSet(custom.fields.AddDate field) {
-		return isSetField(field);
-	}
+    public custom.fields.AddDate get(custom.fields.AddDate value) throws FieldNotFound {
+        getField(value);
+        return value;
+    }
 
-	public boolean isSetAddDate() {
-		return isSetField(28);
-	}
+    public custom.fields.AddDate getAddDate() throws FieldNotFound {
+        return get(new custom.fields.AddDate());
+    }
+
+    public boolean isSet(custom.fields.AddDate field) {
+        return isSetField(field);
+    }
+
+    public boolean isSetAddDate() {
+        return isSetField(28);
+    }
 
 }

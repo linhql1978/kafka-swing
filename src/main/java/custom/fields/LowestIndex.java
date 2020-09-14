@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class LowestIndex extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 25;
-	
-	public LowestIndex() {
-		super(25);
-	}
+    public static final int FIELD = 25;
 
-	public LowestIndex(double data) {
-		super(25, data);
-	}
-	
+    public LowestIndex() {
+        super(25);
+    }
+
+    public LowestIndex(double data) {
+        super(25, data);
+    }
+
 }

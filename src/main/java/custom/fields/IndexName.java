@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class IndexName extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 18;
-	
-	public IndexName() {
-		super(18);
-	}
+    public static final int FIELD = 18;
 
-	public IndexName(String data) {
-		super(18, data);
-	}
-	
+    public IndexName() {
+        super(18);
+    }
+
+    public IndexName(String data) {
+        super(18, data);
+    }
+
 }

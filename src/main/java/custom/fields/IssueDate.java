@@ -26,16 +26,16 @@ import java.time.LocalDateTime;
 
 public class IssueDate extends UtcTimeStampField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 225;
-	
-	public IssueDate() {
-		super(225);
-	}
+    public static final int FIELD = 225;
 
-	public IssueDate(LocalDateTime data) {
-		super(225, data, true);
-	}
-	
+    public IssueDate() {
+        super(225);
+    }
+
+    public IssueDate(LocalDateTime data) {
+        super(225, data, true);
+    }
+
 }

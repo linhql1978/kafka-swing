@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class BeginString extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 8;
-	
-	public BeginString() {
-		super(8);
-	}
+    public static final int FIELD = 8;
 
-	public BeginString(String data) {
-		super(8, data);
-	}
-	
+    public BeginString() {
+        super(8);
+    }
+
+    public BeginString(String data) {
+        super(8, data);
+    }
+
 }

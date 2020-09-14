@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class totalNormalTradedQttyOd extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 210;
-	
-	public totalNormalTradedQttyOd() {
-		super(210);
-	}
+    public static final int FIELD = 210;
 
-	public totalNormalTradedQttyOd(double data) {
-		super(210, data);
-	}
-	
+    public totalNormalTradedQttyOd() {
+        super(210);
+    }
+
+    public totalNormalTradedQttyOd(double data) {
+        super(210, data);
+    }
+
 }
