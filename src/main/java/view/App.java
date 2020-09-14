@@ -21,13 +21,11 @@ public class App extends javax.swing.JFrame {
         Gson gson = new Gson();
         for (ConsumerRecord<String, String> item : records) {
             try {
-                System.out.println(item.value());
                 StockInfoModel object = gson.fromJson(item.value().substring(1, item.value().length() - 1), StockInfoModel.class);
                 boolean check = false;
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(i).getSymbol().equals(object.getSymbol())) {
                         data.set(i, object);
-                        System.out.println("Update:" + object);
                         check = true;
                         break;
                     }

@@ -39,7 +39,6 @@ public class ConsumerConfig {
     public void listen(KafkaConsumer consumer, App app) {
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-            System.out.println("Count: " + records.count());
             app.reRender(records);
         }
     }
