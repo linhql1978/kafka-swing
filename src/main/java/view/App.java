@@ -3,24 +3,32 @@ package view;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import comsumer.ReadThread;
-import custom.messages.StockInfo;
+import files.FileService;
+import lombok.Getter;
+import lombok.Setter;
 import model.StockInfoModel;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Getter
+@Setter
 public class App extends javax.swing.JFrame {
     private static List<StockInfoModel> data;
     ArrayList arrCols;
     DefaultTableModel model;
+    Logger logger = LoggerFactory.getLogger(App.class);
 
     private Map<Integer, String> difference(StockInfoModel s1, StockInfoModel s2) {
         Map<Integer, String> fields = new HashMap<>();
@@ -94,10 +102,14 @@ public class App extends javax.swing.JFrame {
     }
 
     public App() {
+        logger.info("init "+this);
         initComponents();
         data = new ArrayList<>();
         model = new DefaultTableModel();
         arrCols = new ArrayList();
+        jProgressBar1.setStringPainted(true);
+        fileService = new FileService(jProgressBar1,this);
+        initBtnClick();
 
         arrCols.add("ID chứng khoán"); //IDSymbol
         arrCols.add("Mã chứng khoán"); //Symbol
@@ -131,17 +143,9 @@ public class App extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        listMessage.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
+        defaultListModel = new DefaultListModel();
+        listMessage.setModel(defaultListModel);
 
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
-        });
         jScrollPane1.setViewportView(listMessage);
 
         btnChooseFile.setText("Choose File");
@@ -152,10 +156,28 @@ public class App extends javax.swing.JFrame {
         });
 
         btnReadFile.setText("Read");
+        btnReadFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                btnReadFileActionPerformed(actionEvent);
+            }
+        });
 
         btnPauseRead.setText("Pause");
+        btnPauseRead.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                btnPauseReadPerformed(actionEvent);
+            }
+        });
 
         btnContinueRead.setText("Continue");
+        btnContinueRead.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                btnContinueReadPerformed(actionEvent);
+            }
+        });
 
         btnCancelRead.setText("Cancel");
         btnCancelRead.addActionListener(new java.awt.event.ActionListener() {
@@ -252,15 +274,59 @@ public class App extends javax.swing.JFrame {
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("save File");
         int result = jFileChooser.showSaveDialog(null);
-        if (result == JFileChooser.APPROVE_OPTION) {
+        if (result == JFileChooser.APPROVE_OPTION){
             File file = jFileChooser.getSelectedFile();
             lbPathFile.setText(file.getPath());
-            System.out.println(file);
+
+            btnChooseFile.setEnabled(true);
+            btnReadFile.setEnabled(true);
+            btnPauseRead.setEnabled(false);
+            btnContinueRead.setEnabled(false);
+            btnCancelRead.setEnabled(false);
+
+            pathFile = file.getPath().toString();
+            fileService.setPathFile(pathFile);
         }
     }//GEN-LAST:event_btnChooseFileActionPerformed
 
+    private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+        // TODO add your handling code here:
+        fileService.send();
+        btnChooseFile.setEnabled(false);
+        btnReadFile.setEnabled(false);
+        btnPauseRead.setEnabled(true);
+        btnContinueRead.setEnabled(false);
+        btnCancelRead.setEnabled(true);
+    }//GEN-LAST:event_btnCancelReadActionPerformed
+
+    private void btnPauseReadPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+        // TODO add your handling code here:
+        fileService.pause();
+        btnChooseFile.setEnabled(false);
+        btnReadFile.setEnabled(false);
+        btnPauseRead.setEnabled(false);
+        btnContinueRead.setEnabled(true);
+        btnCancelRead.setEnabled(true);
+    }//GEN-LAST:event_btnCancelReadActionPerformed
+
+    private void btnContinueReadPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+        // TODO add your handling code here:
+        fileService.resume();
+        btnChooseFile.setEnabled(false);
+        btnReadFile.setEnabled(false);
+        btnPauseRead.setEnabled(true);
+        btnContinueRead.setEnabled(false);
+        btnCancelRead.setEnabled(true);
+    }//GEN-LAST:event_btnCancelReadActionPerformed
+
     private void btnCancelReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
         // TODO add your handling code here:
+        fileService.cancel();
+        btnChooseFile.setEnabled(true);
+        btnReadFile.setEnabled(false);
+        btnPauseRead.setEnabled(false);
+        btnContinueRead.setEnabled(false);
+        btnCancelRead.setEnabled(false);
     }//GEN-LAST:event_btnCancelReadActionPerformed
 
     /**
@@ -278,6 +344,18 @@ public class App extends javax.swing.JFrame {
             }
         });
     }
+
+    public void initBtnClick() {
+        btnChooseFile.setEnabled(true);
+        btnReadFile.setEnabled(false);
+        btnPauseRead.setEnabled(false);
+        btnContinueRead.setEnabled(false);
+        btnCancelRead.setEnabled(false);
+    }
+
+    private FileService fileService;
+    private String pathFile;
+    private volatile DefaultListModel defaultListModel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelRead;
