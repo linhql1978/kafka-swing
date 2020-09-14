@@ -41,6 +41,7 @@ public class Config {
 
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+            System.out.println("Count: " + records.count());
             app.reRender(records);
         }
     }

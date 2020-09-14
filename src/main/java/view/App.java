@@ -28,35 +28,39 @@ public class App extends javax.swing.JFrame {
     public void reRender(ConsumerRecords<String, String> records) {
         Gson gson = new Gson();
         for (ConsumerRecord<String, String> item : records) {
-//            System.out.println(item.value());
-            StockInfoModel object = gson.fromJson(item.value().substring(1, item.value().length() - 1), StockInfoModel.class);
-            boolean check = false;
-            for (int i = 0; i < data.size(); i++) {
-                if (data.get(i).getSymbol().equals(object.getSymbol())) {
-                    data.set(i, object);
-                    System.out.println("Update:"+ object);
-                    check = true;
-                    break;
+            try {
+                System.out.println(item.value());
+                StockInfoModel object = gson.fromJson(item.value().substring(1, item.value().length() - 1), StockInfoModel.class);
+                boolean check = false;
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(i).getSymbol().equals(object.getSymbol())) {
+                        data.set(i, object);
+                        System.out.println("Update:"+ object);
+                        check = true;
+                        break;
+                    }
                 }
-            }
-            if (!check) {
+                if (!check) {
 //                System.out.println(object.getSymbol());
-                data.add(object);
-                System.out.println("Add: " + object);
+                    data.add(object);
+                    System.out.println("Add: " + object);
+                }
+                model.setRowCount(0);
+                for (StockInfoModel st : data) {
+                    Object[] objects = {
+                            st.getSymbolID(),
+                            st.getSymbol(),
+                            st.getBoardCode(),
+                            st.getTradingSessionID(),
+                            st.getSecurityTradingStatus(),
+                            st.getListingStatus()
+                    };
+                    model.addRow(objects);
+                }
+                tblReceiveMessage.setModel(model);
+            }catch (Exception e) {
+                e.printStackTrace();
             }
-            model.setRowCount(0);
-            for (StockInfoModel st : data) {
-                Object[] objects = {
-                        st.getSymbolID(),
-                        st.getSymbol(),
-                        st.getBoardCode(),
-                        st.getTradingSessionID(),
-                        st.getSecurityTradingStatus(),
-                        st.getListingStatus()
-                };
-                model.addRow(objects);
-            }
-            tblReceiveMessage.setModel(model);
         }
     }
 
