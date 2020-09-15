@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -75,6 +77,14 @@ public class App extends javax.swing.JFrame {
                     int finalIndexChange = indexChange;
                     fields.entrySet().stream().forEach(map ->{
                         model.setValueAt(map.getValue(), finalIndexChange, map.getKey());
+
+                        TableCellRenderer cellRenderer = tblReceiveMessage.getCellRenderer(finalIndexChange, map.getKey());
+                        Component component = cellRenderer.getTableCellRendererComponent(tblReceiveMessage, map.getValue(), false, false, finalIndexChange, map.getKey());
+                        if (!component.getBackground().equals(Color.GREEN)) {
+                            component.setBackground(Color.GREEN);
+                        } else {
+                            component.setBackground(Color.RED);
+                        }
                     });
                 }
 
