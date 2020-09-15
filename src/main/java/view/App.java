@@ -95,9 +95,9 @@ public class App extends javax.swing.JFrame {
                 tblReceiveMessage.setModel(model);
             }
         } catch (JsonSyntaxException | ArrayIndexOutOfBoundsException e) {
-//            e.printStackTrace();
+            logger.error(e.getMessage());
         } catch (Exception e) {
-//            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
