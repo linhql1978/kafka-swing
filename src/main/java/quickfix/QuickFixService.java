@@ -24,7 +24,9 @@ public class QuickFixService {
     try {
       dataDictionary = new DataDictionary("spec/CustomFIX.xml");
     } catch (ConfigError configError) {
-      logger.info(configError + " at " + configError.getStackTrace()[0]);
+      logger.error(configError + " at " + configError.getStackTrace()[0]);
+    } catch (Exception exception) {
+      logger.error(exception + " at " + exception.getStackTrace()[0]);
     }
   }
 
