@@ -45,6 +45,8 @@ public class App extends javax.swing.JFrame {
                 }
             } catch (IllegalAccessException e) {
                 logger.error(e.getMessage());
+            } catch (Exception e) {
+                logger.error(e.getMessage());
             }
             index ++;
         }
