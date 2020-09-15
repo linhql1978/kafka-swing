@@ -13,6 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
@@ -20,16 +23,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
+
 @Getter
 @Setter
 public class App extends javax.swing.JFrame {
     private static List<StockInfoModel> data;
     ArrayList arrCols;
     DefaultTableModel model;
+    private Map colors;
+    ColorRenderer colorRenderer;
     Logger logger = LoggerFactory.getLogger(App.class);
 
     private Map<Integer, String> difference(StockInfoModel s1, StockInfoModel s2) {
@@ -79,14 +83,16 @@ public class App extends javax.swing.JFrame {
                     int finalIndexChange = indexChange;
                     fields.entrySet().stream().forEach(map ->{
                         model.setValueAt(map.getValue(), finalIndexChange, map.getKey());
-
-                        TableCellRenderer cellRenderer = tblReceiveMessage.getCellRenderer(finalIndexChange, map.getKey());
-                        Component component = cellRenderer.getTableCellRendererComponent(tblReceiveMessage, map.getValue(), false, false, finalIndexChange, map.getKey());
-                        if (!component.getBackground().equals(Color.GREEN)) {
-                            component.setBackground(Color.GREEN);
-                        } else {
-                            component.setBackground(Color.RED);
+                        colorRenderer.setCellColor(finalIndexChange,map.getKey(),Color.ORANGE);
+                        try {
+                            Thread.sleep(10);
+                            colorRenderer.setCellColor(finalIndexChange,map.getKey(),Color.WHITE);
+                        } catch (InterruptedException e) {
+                            logger.error(e.getMessage());
+                        }catch (Exception e){
+                            logger.error(e.getMessage());
                         }
+
                     });
                 }
 
@@ -102,9 +108,12 @@ public class App extends javax.swing.JFrame {
                             stockInfoModel.getSecurityTradingStatus(),
                             stockInfoModel.getListingStatus()
                     };
-                    model.addRow(objects);
+                    model.insertRow(model.getRowCount(),objects);
+                    colorRenderer.setRowColor(model.getRowCount()-1, Color.YELLOW);
+                    //Thread.sleep(10);
+                    colorRenderer.setRowColor(model.getRowCount()-1, Color.WHITE);
                 }
-                tblReceiveMessage.setModel(model);
+
             }
         } catch (JsonSyntaxException | ArrayIndexOutOfBoundsException e) {
             logger.error(e.getMessage());
@@ -118,19 +127,28 @@ public class App extends javax.swing.JFrame {
         initComponents();
         data = new ArrayList<>();
         model = new DefaultTableModel();
-        arrCols = new ArrayList();
+        colors = new HashMap();
         jProgressBar1.setStringPainted(true);
         fileService = new FileService(jProgressBar1,this);
         initBtnClick();
 
-        arrCols.add("ID chứng khoán"); //IDSymbol
-        arrCols.add("Mã chứng khoán"); //Symbol
-        arrCols.add("Mã bảng");         //BoardCode
-        arrCols.add("Mã trạng thái GD");//TradingSessionID
-        arrCols.add("Trạng thái GD");//TradSesStatus
-        arrCols.add("Trạng thái chứng khoán");//SecurityTradingStatus
-        arrCols.add("Tình trạng chứng khoán");//ListingStatus
-        model.setColumnIdentifiers(arrCols.toArray());
+        model.addColumn("ID chứng khoán"); //IDSymbol
+        model.addColumn("Mã chứng khoán"); //Symbol
+        model.addColumn("Mã bảng");         //BoardCode
+        model.addColumn("Mã trạng thái GD");//TradingSessionID
+        model.addColumn("Trạng thái GD");//TradSesStatus
+        model.addColumn("Trạng thái chứng khoán");//SecurityTradingStatus
+        model.addColumn("Tình trạng chứng khoán");//ListingStatus
+        tblReceiveMessage = new JTable(model){
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                colorRenderer.setBackground(component, row, column);
+                return component;
+            }
+        };
+        jScrollPane2.setViewportView(tblReceiveMessage);
+        colorRenderer = new ColorRenderer(tblReceiveMessage);
     }
 
     @SuppressWarnings("unchecked")
@@ -386,4 +404,144 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JList<String> listMessage;
     private javax.swing.JTable tblReceiveMessage;
     // End of variables declaration//GEN-END:variables
+    static class ColorRenderer implements ActionListener
+    {
+        private JTable table;
+        private AbstractTableModel model;
+        private Map colors;
+        private boolean isBlinking = true;
+        private Timer timer;
+        private Point location;
+
+        public ColorRenderer(JTable table)
+        {
+            this.table = table;
+            model = (AbstractTableModel)table.getModel();
+            colors = new HashMap();
+            location = new Point();
+        }
+
+        public void setBackground(Component c, int row, int column)
+        {
+            //  Don't override the background color of a selected cell
+
+            if ( table.isCellSelected(row, column) ) return;
+
+            //  The default render does not reset the background color
+            //  that was set for the previous cell, so reset it here
+
+            if (c instanceof DefaultTableCellRenderer)
+            {
+                c.setBackground( table.getBackground() );
+            }
+
+            //  Don't highlight this time
+
+            if ( !isBlinking ) return;
+
+            //  In case columns have been reordered, convert the column number
+
+            column = table.convertColumnIndexToModel(column);
+
+            //  Get cell color
+
+            Object key = getKey(row, column);
+            Object o = colors.get( key );
+
+            if (o != null)
+            {
+                c.setBackground( (Color)o );
+                return;
+            }
+
+            //  Get row color
+
+            key = getKey(row, -1);
+            o = colors.get( key );
+
+            if (o != null)
+            {
+                c.setBackground( (Color)o );
+                return;
+            }
+
+            //  Get column color
+
+            key = getKey(-1, column);
+            o = colors.get( key );
+
+            if (o != null)
+            {
+                c.setBackground( (Color)o );
+                return;
+            }
+
+        }
+
+        public void setCellColor(int row, int column, Color color)
+        {
+            Point key = new Point(row, column);
+            colors.put(key, color);
+        }
+
+        public void setColumnColor(int column, Color color)
+        {
+            setCellColor(-1, column, color);
+        }
+
+        public void setRowColor(int row, Color color)
+        {
+            setCellColor(row, -1, color);
+        }
+
+        private Object getKey(int row, int column)
+        {
+            location.x = row;
+            location.y = column;
+            return location;
+        }
+
+        public void startBlinking(int interval)
+        {
+            timer = new Timer(interval, this);
+            timer.start();
+        }
+
+        public void stopBlinking()
+        {
+            timer.stop();
+        }
+
+        public void actionPerformed(ActionEvent e)
+        {
+            isBlinking = !isBlinking;
+
+            Iterator it = colors.keySet().iterator();
+
+            while ( it.hasNext() )
+            {
+                Point key = (Point)it.next();
+                int row = key.x;
+                int column = key.y;
+
+                if (column == -1)
+                {
+                    model.fireTableRowsUpdated(row, row);
+                }
+                else if (row == -1)
+                {
+                    int rows = table.getRowCount();
+
+                    for (int i = 0; i < rows; i++)
+                    {
+                        model.fireTableCellUpdated(i, column);
+                    }
+                }
+                else
+                {
+                    model.fireTableCellUpdated(row, column);
+                }
+            }
+        }
+    }
 }
