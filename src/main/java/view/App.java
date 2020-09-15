@@ -44,7 +44,7 @@ public class App extends javax.swing.JFrame {
                     fields.put(index, valueS2);
                 }
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
             index ++;
         }
