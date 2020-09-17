@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class TotalStock extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 22;
-	
-	public TotalStock() {
-		super(22);
-	}
+    public static final int FIELD = 22;
 
-	public TotalStock(double data) {
-		super(22, data);
-	}
-	
+    public TotalStock() {
+        super(22);
+    }
+
+    public TotalStock(double data) {
+        super(22, data);
+    }
+
 }

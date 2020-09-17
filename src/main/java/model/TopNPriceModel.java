@@ -12,6 +12,16 @@ public class TopNPriceModel {
     private String NoTopPrice;
     private List<SubTopNPriceModel> group = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "TopNPriceModel{" +
+                "Symbol='" + Symbol + '\'' +
+                ", BoardCode='" + BoardCode + '\'' +
+                ", NoTopPrice='" + NoTopPrice + '\'' +
+                ", group=" + group +
+                '}';
+    }
+
     public String getSymbol() {
         return Symbol;
     }

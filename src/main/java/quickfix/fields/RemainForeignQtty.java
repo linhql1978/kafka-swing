@@ -26,16 +26,16 @@ import java.time.LocalDateTime;
 
 public class RemainForeignQtty extends UtcTimeStampField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 3301;
-	
-	public RemainForeignQtty() {
-		super(3301);
-	}
+    public static final int FIELD = 3301;
 
-	public RemainForeignQtty(LocalDateTime data) {
-		super(3301, data, true);
-	}
-	
+    public RemainForeignQtty() {
+        super(3301);
+    }
+
+    public RemainForeignQtty(LocalDateTime data) {
+        super(3301, data, true);
+    }
+
 }

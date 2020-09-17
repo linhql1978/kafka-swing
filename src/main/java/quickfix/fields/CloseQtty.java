@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class CloseQtty extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 805;
-	
-	public CloseQtty() {
-		super(805);
-	}
+    public static final int FIELD = 805;
 
-	public CloseQtty(double data) {
-		super(805, data);
-	}
-	
+    public CloseQtty() {
+        super(805);
+    }
+
+    public CloseQtty(double data) {
+        super(805, data);
+    }
+
 }

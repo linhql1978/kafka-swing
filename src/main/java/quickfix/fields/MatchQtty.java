@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class MatchQtty extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 32;
-	
-	public MatchQtty() {
-		super(32);
-	}
+    public static final int FIELD = 32;
 
-	public MatchQtty(double data) {
-		super(32, data);
-	}
-	
+    public MatchQtty() {
+        super(32);
+    }
+
+    public MatchQtty(double data) {
+        super(32, data);
+    }
+
 }

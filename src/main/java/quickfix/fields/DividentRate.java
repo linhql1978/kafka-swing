@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class DividentRate extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 244;
-	
-	public DividentRate() {
-		super(244);
-	}
+    public static final int FIELD = 244;
 
-	public DividentRate(int data) {
-		super(244, data);
-	}
-	
+    public DividentRate() {
+        super(244);
+    }
+
+    public DividentRate(int data) {
+        super(244, data);
+    }
+
 }

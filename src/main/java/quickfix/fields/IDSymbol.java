@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class IDSymbol extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 15;
-	
-	public IDSymbol() {
-		super(15);
-	}
+    public static final int FIELD = 15;
 
-	public IDSymbol(int data) {
-		super(15, data);
-	}
-	
+    public IDSymbol() {
+        super(15);
+    }
+
+    public IDSymbol(int data) {
+        super(15, data);
+    }
+
 }

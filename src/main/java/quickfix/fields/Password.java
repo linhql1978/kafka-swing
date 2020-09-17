@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class Password extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 554;
-	
-	public Password() {
-		super(554);
-	}
+    public static final int FIELD = 554;
 
-	public Password(String data) {
-		super(554, data);
-	}
-	
+    public Password() {
+        super(554);
+    }
+
+    public Password(String data) {
+        super(554, data);
+    }
+
 }

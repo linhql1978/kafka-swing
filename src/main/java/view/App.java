@@ -13,6 +13,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import quickfix.messages.StockInfo;
 
 import javax.swing.Timer;
 import javax.swing.*;
@@ -42,11 +43,15 @@ public class App extends javax.swing.JFrame {
     private static int size = -1, temp = -1, indexChange = -1;
     private static int size1 = -1, temp1 = -1, indexChane1 = -1;
 
+    private static Map<String, List<String>> topNPriceMap;
+    private static Map<String, Integer> topNPriceMapIndex;
+    private Integer lastIndex;
+
     Logger logger = LoggerFactory.getLogger(App.class);
 
     private Map<Integer, String> difference(StockInfoModel s1, StockInfoModel s2) {
-        Map<Integer, String> fields = new HashMap<>();
         int index = 0;
+        Map<Integer, String> fields = new HashMap<>();
         for (Field field : StockInfoModel.class.getDeclaredFields()) {
             field.setAccessible(true);
             try {
@@ -65,28 +70,15 @@ public class App extends javax.swing.JFrame {
         return fields;
     }
 
-    private Map<Integer, String> difference(TopNPriceModel s1, TopNPriceModel s2) {
+    private Map<Integer, String> difference(SubTopNPriceModel s1, SubTopNPriceModel s2, int index) {
         Map<Integer, String> fields = new HashMap<>();
-        int index = 0;
-        for (Field field : StockInfoModel.class.getDeclaredFields()) {
+        for (Field field : SubTopNPriceModel.class.getDeclaredFields()) {
             field.setAccessible(true);
             try {
-                Object os1 = field.get(s1);
-                Object os2 = field.get(s2);
-                if (os1 instanceof List && os2 instanceof List) {
-                    List<SubTopNPriceModel> l1 = (List<SubTopNPriceModel>) os1;
-                    List<SubTopNPriceModel> l2 = (List<SubTopNPriceModel>) os2;
-                    int size = Math.max(l1.size(), l2.size());
-                    for (int i = 0; i < size; i++) {
-                        if (size > 3) break;
-
-                    }
-                } else {
-                    String valueS1 = field.get(s1).toString();
-                    String valueS2 = field.get(s2).toString();
-                    if (!valueS1.equals(valueS2)) {
-                        fields.put(index, valueS2);
-                    }
+                String valueS1 = field.get(s1).toString();
+                String valueS2 = field.get(s2).toString();
+                if (!valueS1.equals(valueS2)) {
+                    fields.put(index, valueS2);
                 }
             } catch (IllegalAccessException e) {
                 logger.error(e.getMessage());
@@ -95,7 +87,6 @@ public class App extends javax.swing.JFrame {
             }
             index++;
         }
-
         return fields;
     }
 
@@ -107,7 +98,6 @@ public class App extends javax.swing.JFrame {
             if (data.get(i).getSymbol().equals(object.getSymbol())) {
                 fields = difference(data.get(i), object);
                 if (!fields.isEmpty()) {
-                    data.set(i, object);
                     indexChange = i;
                 }
                 check = true;
@@ -149,7 +139,6 @@ public class App extends javax.swing.JFrame {
             };
             model.insertRow(model.getRowCount(), objects);
             colorRenderer.setRowColor(model.getRowCount() - 1, Color.YELLOW);
-            //Thread.sleep(10);
             colorRenderer.setRowColor(model.getRowCount() - 1, Color.WHITE);
         }
     }
@@ -165,48 +154,52 @@ public class App extends javax.swing.JFrame {
                 if (subTopNPriceModel != null) object.getGroup().add(subTopNPriceModel);
             }
         }
+        System.out.println(object.toString());
 
-        Map<Integer, String> fields = new HashMap<>();
-        boolean check = false;
-        for (int i = 0; i < topNPriceModels.size(); i++) {
-            if (topNPriceModels.get(i).getSymbol().equals(object.getSymbol())) {
+        List<String> topNprice = new ArrayList<>();
+        topNprice.add(object.getSymbol());
+        topNprice.add(object.getBoardCode());
+        topNprice.add(object.getNoTopPrice());
 
-                check = true;
-                break;
+        for (int i = 0; i < 3; i++) {
+            if (i < object.getGroup().size()) {
+                topNprice.add(object.getGroup().get(i).getNumTopPrice() != null ? object.getGroup().get(i).getNumTopPrice() : "");
+                topNprice.add(object.getGroup().get(i).getBestBidQtty() != null ? object.getGroup().get(i).getBestBidPrice() : "");
+                topNprice.add(object.getGroup().get(i).getBestOfferPrice() != null ? object.getGroup().get(i).getBestBidQtty() : "");
+                topNprice.add(object.getGroup().get(i).getBestBidPrice() != null ? object.getGroup().get(i).getBestOfferPrice() : "");
+                topNprice.add(object.getGroup().get(i).getBestOfferQtty() != null ? object.getGroup().get(i).getBestOfferQtty() : "");
+            } else {
+                topNprice.add("");
+                topNprice.add("");
+                topNprice.add("");
+                topNprice.add("");
+                topNprice.add("");
             }
         }
 
-        if (!check) {
-            topNPriceModels.add(object);
-            size1++;
-        }
-
-        if (size1 > temp1) {
-            TopNPriceModel topNPriceModel = topNPriceModels.get(size1);
-            temp1++;
-            int n = 3;
-            Object[] objects = new Object[18];
-            objects[0] = topNPriceModel.getSymbol();
-            objects[1] = topNPriceModel.getBoardCode();
-            objects[2] = topNPriceModel.getNoTopPrice();
-            for (int i = 0; i < topNPriceModel.getGroup().size(); i++) {
-                if (i > 3) break;
-                objects[n] = topNPriceModel.getGroup().get(i).getNumTopPrice();
-                objects[n + 1] = topNPriceModel.getGroup().get(i).getBestBidPrice();
-                objects[n + 2] = topNPriceModel.getGroup().get(i).getBestBidQtty();
-                objects[n + 3] = topNPriceModel.getGroup().get(i).getBestOfferPrice();
-                objects[n + 4] = topNPriceModel.getGroup().get(i).getBestOfferQtty();
-                n += 5;
+        String key = topNprice.get(0);
+        if (topNPriceMap.containsKey(key)) {
+            List<String> oldData = topNPriceMap.get(key);
+            for (int i = 0; i < oldData.size(); i++) {
+                if (!oldData.get(i).equals(topNprice.get(i))) {
+                    try {
+                        defaultTableModelTopNPrice.setValueAt(topNprice.get(i), topNPriceMapIndex.get(key), i);
+                        colorRenderer.setCellColor(topNPriceMapIndex.get(key), i, Color.ORANGE);
+                        Thread.sleep(5);
+                        colorRenderer.setCellColor(topNPriceMapIndex.get(key), i, Color.WHITE);
+                    } catch (InterruptedException e) {
+                        logger.error(e.getMessage());
+                    } catch (Exception e) {
+                        logger.error(e.getMessage());
+                    }
+                }
             }
-            defaultTableModelTopNPrice.insertRow(defaultTableModelTopNPrice.getRowCount(), objects);
+            topNPriceMap.put(key, topNprice);
+        } else {
+            topNPriceMap.put(key, topNprice);
+            defaultTableModelTopNPrice.insertRow(defaultTableModelTopNPrice.getRowCount(), topNPriceMap.get(key).toArray());
+            topNPriceMapIndex.put(key, defaultTableModelTopNPrice.getRowCount() - 1);
         }
-
-    }
-
-    public Object[] getObject(SubTopNPriceModel subTopNPriceModel) {
-
-        Object[] object = {};
-        return object;
     }
 
     public void reRender(ConsumerRecords<String, String> records, String topic) {
@@ -236,6 +229,9 @@ public class App extends javax.swing.JFrame {
         jProgressBar1.setStringPainted(true);
         fileService = new FileService(jProgressBar1, this);
         gson = new Gson();
+        topNPriceMap = new HashMap<>();
+        topNPriceMapIndex = new HashMap<>();
+        lastIndex = 0;
         initBtnClick();
 
         model.addColumn("ID chứng khoán"); //IDSymbol
@@ -258,6 +254,7 @@ public class App extends javax.swing.JFrame {
 
         defaultTableModelTopNPrice.addColumn("Symbol");
         defaultTableModelTopNPrice.addColumn("BoardCode");
+        defaultTableModelTopNPrice.addColumn("NoTopPrice");
 
         defaultTableModelTopNPrice.addColumn("NumTopPrice");
         defaultTableModelTopNPrice.addColumn("BestBidPrice");
@@ -310,7 +307,7 @@ public class App extends javax.swing.JFrame {
         jScrollPaneTopNPrice = new JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        setPreferredSize(new Dimension(1200, 600));
         defaultListModel = new DefaultListModel();
         listMessage.setModel(defaultListModel);
 

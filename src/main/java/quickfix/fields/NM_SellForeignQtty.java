@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class NM_SellForeignQtty extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 816;
-	
-	public NM_SellForeignQtty() {
-		super(816);
-	}
+    public static final int FIELD = 816;
 
-	public NM_SellForeignQtty(double data) {
-		super(816, data);
-	}
-	
+    public NM_SellForeignQtty() {
+        super(816);
+    }
+
+    public NM_SellForeignQtty(double data) {
+        super(816, data);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class TypeIndex extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 27;
-	
-	public TypeIndex() {
-		super(27);
-	}
+    public static final int FIELD = 27;
 
-	public TypeIndex(int data) {
-		super(27, data);
-	}
-	
+    public TypeIndex() {
+        super(27);
+    }
+
+    public TypeIndex(int data) {
+        super(27, data);
+    }
+
 }

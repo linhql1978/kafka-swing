@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class PT_SellForeignValue extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 8171;
-	
-	public PT_SellForeignValue() {
-		super(8171);
-	}
+    public static final int FIELD = 8171;
 
-	public PT_SellForeignValue(double data) {
-		super(8171, data);
-	}
-	
+    public PT_SellForeignValue() {
+        super(8171);
+    }
+
+    public PT_SellForeignValue(double data) {
+        super(8171, data);
+    }
+
 }

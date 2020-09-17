@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class Underlying extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 800;
-	
-	public Underlying() {
-		super(800);
-	}
+    public static final int FIELD = 800;
 
-	public Underlying(String data) {
-		super(800, data);
-	}
-	
+    public Underlying() {
+        super(800);
+    }
+
+    public Underlying(String data) {
+        super(800, data);
+    }
+
 }

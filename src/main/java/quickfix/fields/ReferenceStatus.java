@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class ReferenceStatus extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 232;
-	
-	public ReferenceStatus() {
-		super(232);
-	}
+    public static final int FIELD = 232;
 
-	public ReferenceStatus(String data) {
-		super(232, data);
-	}
-	
+    public ReferenceStatus() {
+        super(232);
+    }
+
+    public ReferenceStatus(String data) {
+        super(232, data);
+    }
+
 }

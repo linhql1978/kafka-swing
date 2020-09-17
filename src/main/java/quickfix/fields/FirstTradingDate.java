@@ -26,16 +26,16 @@ import java.time.LocalDateTime;
 
 public class FirstTradingDate extends UtcTimeStampField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 802;
-	
-	public FirstTradingDate() {
-		super(802);
-	}
+    public static final int FIELD = 802;
 
-	public FirstTradingDate(LocalDateTime data) {
-		super(802, data, true);
-	}
-	
+    public FirstTradingDate() {
+        super(802);
+    }
+
+    public FirstTradingDate(LocalDateTime data) {
+        super(802, data, true);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class HighestIndex extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 24;
-	
-	public HighestIndex() {
-		super(24);
-	}
+    public static final int FIELD = 24;
 
-	public HighestIndex(double data) {
-		super(24, data);
-	}
-	
+    public HighestIndex() {
+        super(24);
+    }
+
+    public HighestIndex(double data) {
+        super(24, data);
+    }
+
 }

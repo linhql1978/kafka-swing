@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class CurrentStatus extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 21;
-	
-	public CurrentStatus() {
-		super(21);
-	}
+    public static final int FIELD = 21;
 
-	public CurrentStatus(int data) {
-		super(21, data);
-	}
-	
+    public CurrentStatus() {
+        super(21);
+    }
+
+    public CurrentStatus(int data) {
+        super(21, data);
+    }
+
 }

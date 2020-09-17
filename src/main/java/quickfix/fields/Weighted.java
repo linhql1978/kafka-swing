@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class Weighted extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 12;
-	
-	public Weighted() {
-		super(12);
-	}
+    public static final int FIELD = 12;
 
-	public Weighted(double data) {
-		super(12, data);
-	}
-	
+    public Weighted() {
+        super(12);
+    }
+
+    public Weighted(double data) {
+        super(12, data);
+    }
+
 }
