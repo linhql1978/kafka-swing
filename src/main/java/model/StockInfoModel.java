@@ -5,67 +5,67 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StockInfoModel {
 
-    private String IDSymbol;
-    private String Symbol;
-    private String BoardCode;
-    private String TradingSessionID;
-    private String TradSecStatus;
-    private String SecurityTradingStatus;
-    private String ListingStatus;
+  private String IDSymbol;
+  private String Symbol;
+  private String BoardCode;
+  private String TradingSessionID;
+  private String TradSecStatus;
+  private String SecurityTradingStatus;
+  private String ListingStatus;
 
-    public String getIDSymbol() {
-        return IDSymbol;
-    }
+  public String getIDSymbol() {
+    return IDSymbol;
+  }
 
-    public void setIDSymbol(String IDSymbol) {
-        this.IDSymbol = IDSymbol;
-    }
+  public void setIDSymbol(String IDSymbol) {
+    this.IDSymbol = IDSymbol;
+  }
 
-    public String getSymbol() {
-        return Symbol;
-    }
+  public String getSymbol() {
+    return Symbol;
+  }
 
-    public void setSymbol(String symbol) {
-        Symbol = symbol;
-    }
+  public void setSymbol(String symbol) {
+    Symbol = symbol;
+  }
 
-    public String getBoardCode() {
-        return BoardCode;
-    }
+  public String getBoardCode() {
+    return BoardCode;
+  }
 
-    public void setBoardCode(String boardCode) {
-        BoardCode = boardCode;
-    }
+  public void setBoardCode(String boardCode) {
+    BoardCode = boardCode;
+  }
 
-    public String getTradingSessionID() {
-        return TradingSessionID;
-    }
+  public String getTradingSessionID() {
+    return TradingSessionID;
+  }
 
-    public void setTradingSessionID(String tradingSessionID) {
-        TradingSessionID = tradingSessionID;
-    }
+  public void setTradingSessionID(String tradingSessionID) {
+    TradingSessionID = tradingSessionID;
+  }
 
-    public String getTradSecStatus() {
-        return TradSecStatus;
-    }
+  public String getTradSecStatus() {
+    return TradSecStatus;
+  }
 
-    public void setTradSecStatus(String tradSecStatus) {
-        TradSecStatus = tradSecStatus;
-    }
+  public void setTradSecStatus(String tradSecStatus) {
+    TradSecStatus = tradSecStatus;
+  }
 
-    public String getSecurityTradingStatus() {
-        return SecurityTradingStatus;
-    }
+  public String getSecurityTradingStatus() {
+    return SecurityTradingStatus;
+  }
 
-    public void setSecurityTradingStatus(String securityTradingStatus) {
-        SecurityTradingStatus = securityTradingStatus;
-    }
+  public void setSecurityTradingStatus(String securityTradingStatus) {
+    SecurityTradingStatus = securityTradingStatus;
+  }
 
-    public String getListingStatus() {
-        return ListingStatus;
-    }
+  public String getListingStatus() {
+    return ListingStatus;
+  }
 
-    public void setListingStatus(String listingStatus) {
-        ListingStatus = listingStatus;
-    }
+  public void setListingStatus(String listingStatus) {
+    ListingStatus = listingStatus;
+  }
 }

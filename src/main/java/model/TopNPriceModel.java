@@ -7,50 +7,50 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TopNPriceModel {
-    private String Symbol;
-    private String BoardCode;
-    private String NoTopPrice;
-    private List<SubTopNPriceModel> group = new ArrayList<>();
+  private String Symbol;
+  private String BoardCode;
+  private String NoTopPrice;
+  private List<SubTopNPriceModel> group = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "TopNPriceModel{" +
-                "Symbol='" + Symbol + '\'' +
-                ", BoardCode='" + BoardCode + '\'' +
-                ", NoTopPrice='" + NoTopPrice + '\'' +
-                ", group=" + group +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "TopNPriceModel{" +
+            "Symbol='" + Symbol + '\'' +
+            ", BoardCode='" + BoardCode + '\'' +
+            ", NoTopPrice='" + NoTopPrice + '\'' +
+            ", group=" + group +
+            '}';
+  }
 
-    public String getSymbol() {
-        return Symbol;
-    }
+  public String getSymbol() {
+    return Symbol;
+  }
 
-    public void setSymbol(String symbol) {
-        Symbol = symbol;
-    }
+  public void setSymbol(String symbol) {
+    Symbol = symbol;
+  }
 
-    public String getBoardCode() {
-        return BoardCode;
-    }
+  public String getBoardCode() {
+    return BoardCode;
+  }
 
-    public void setBoardCode(String boardCode) {
-        BoardCode = boardCode;
-    }
+  public void setBoardCode(String boardCode) {
+    BoardCode = boardCode;
+  }
 
-    public String getNoTopPrice() {
-        return NoTopPrice;
-    }
+  public String getNoTopPrice() {
+    return NoTopPrice;
+  }
 
-    public void setNoTopPrice(String noTopPrice) {
-        NoTopPrice = noTopPrice;
-    }
+  public void setNoTopPrice(String noTopPrice) {
+    NoTopPrice = noTopPrice;
+  }
 
-    public List<SubTopNPriceModel> getGroup() {
-        return group;
-    }
+  public List<SubTopNPriceModel> getGroup() {
+    return group;
+  }
 
-    public void setGroup(List<SubTopNPriceModel> group) {
-        this.group = group;
-    }
+  public void setGroup(List<SubTopNPriceModel> group) {
+    this.group = group;
+  }
 }
