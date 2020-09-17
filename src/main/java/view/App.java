@@ -299,7 +299,7 @@ public class App extends javax.swing.JFrame {
         pack();
     }
 
-    private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
+    private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("save File");
         int result = jFileChooser.showSaveDialog(null);
@@ -318,7 +318,7 @@ public class App extends javax.swing.JFrame {
         }
     }
 
-    private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+    private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {
         fileService.send();
         btnChooseFile.setEnabled(false);
         btnReadFile.setEnabled(false);
@@ -327,7 +327,7 @@ public class App extends javax.swing.JFrame {
         btnCancelRead.setEnabled(true);
     }
 
-    private void btnPauseReadPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+    private void btnPauseReadPerformed(java.awt.event.ActionEvent evt) {
         fileService.pause();
         btnChooseFile.setEnabled(false);
         btnReadFile.setEnabled(false);
@@ -336,7 +336,7 @@ public class App extends javax.swing.JFrame {
         btnCancelRead.setEnabled(true);
     }
 
-    private void btnContinueReadPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+    private void btnContinueReadPerformed(java.awt.event.ActionEvent evt) {
         fileService.resume();
         btnChooseFile.setEnabled(false);
         btnReadFile.setEnabled(false);
@@ -345,7 +345,7 @@ public class App extends javax.swing.JFrame {
         btnCancelRead.setEnabled(true);
     }
 
-    private void btnCancelReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+    private void btnCancelReadActionPerformed(java.awt.event.ActionEvent evt) {
         fileService.cancel();
         btnChooseFile.setEnabled(true);
         btnReadFile.setEnabled(false);
