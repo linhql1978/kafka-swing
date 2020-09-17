@@ -39,7 +39,7 @@ public class App extends javax.swing.JFrame {
     private Map<Integer, String> difference(StockInfoModel s1, StockInfoModel s2) {
         Map<Integer, String> fields = new HashMap<>();
         int index = 0;
-        for(Field field: StockInfoModel.class.getDeclaredFields()) {
+        for (Field field : StockInfoModel.class.getDeclaredFields()) {
             field.setAccessible(true);
             try {
                 String valueS1 = field.get(s1).toString();
@@ -52,7 +52,7 @@ public class App extends javax.swing.JFrame {
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }
-            index ++;
+            index++;
         }
         return fields;
     }
@@ -78,18 +78,18 @@ public class App extends javax.swing.JFrame {
                 }
                 if (!check) {
                     data.add(object);
-                    size ++;
+                    size++;
                 } else {
                     int finalIndexChange = indexChange;
-                    fields.entrySet().stream().forEach(map ->{
+                    fields.entrySet().stream().forEach(map -> {
                         model.setValueAt(map.getValue(), finalIndexChange, map.getKey());
-                        colorRenderer.setCellColor(finalIndexChange,map.getKey(),Color.ORANGE);
+                        colorRenderer.setCellColor(finalIndexChange, map.getKey(), Color.ORANGE);
                         try {
                             Thread.sleep(10);
-                            colorRenderer.setCellColor(finalIndexChange,map.getKey(),Color.WHITE);
+                            colorRenderer.setCellColor(finalIndexChange, map.getKey(), Color.WHITE);
                         } catch (InterruptedException e) {
                             logger.error(e.getMessage());
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             logger.error(e.getMessage());
                         }
 
@@ -98,7 +98,7 @@ public class App extends javax.swing.JFrame {
 
                 if (size > temp) {
                     StockInfoModel stockInfoModel = data.get(size);
-                    temp ++;
+                    temp++;
                     Object[] objects = {
                             stockInfoModel.getIDSymbol(),
                             stockInfoModel.getSymbol(),
@@ -108,10 +108,10 @@ public class App extends javax.swing.JFrame {
                             stockInfoModel.getSecurityTradingStatus(),
                             stockInfoModel.getListingStatus()
                     };
-                    model.insertRow(model.getRowCount(),objects);
-                    colorRenderer.setRowColor(model.getRowCount()-1, Color.YELLOW);
+                    model.insertRow(model.getRowCount(), objects);
+                    colorRenderer.setRowColor(model.getRowCount() - 1, Color.YELLOW);
                     //Thread.sleep(10);
-                    colorRenderer.setRowColor(model.getRowCount()-1, Color.WHITE);
+                    colorRenderer.setRowColor(model.getRowCount() - 1, Color.WHITE);
                 }
 
             }
@@ -123,13 +123,13 @@ public class App extends javax.swing.JFrame {
     }
 
     public App() {
-        logger.info("init "+this);
+        logger.info("init " + this);
         initComponents();
         data = new ArrayList<>();
         model = new DefaultTableModel();
         colors = new HashMap();
         jProgressBar1.setStringPainted(true);
-        fileService = new FileService(jProgressBar1,this);
+        fileService = new FileService(jProgressBar1, this);
         initBtnClick();
 
         model.addColumn("ID chứng khoán"); //IDSymbol
@@ -139,7 +139,7 @@ public class App extends javax.swing.JFrame {
         model.addColumn("Trạng thái GD");//TradSesStatus
         model.addColumn("Trạng thái chứng khoán");//SecurityTradingStatus
         model.addColumn("Tình trạng chứng khoán");//ListingStatus
-        tblReceiveMessage = new JTable(model){
+        tblReceiveMessage = new JTable(model) {
             @Override
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
                 Component component = super.prepareRenderer(renderer, row, column);
@@ -152,7 +152,6 @@ public class App extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -298,13 +297,13 @@ public class App extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("save File");
         int result = jFileChooser.showSaveDialog(null);
-        if (result == JFileChooser.APPROVE_OPTION){
+        if (result == JFileChooser.APPROVE_OPTION) {
             File file = jFileChooser.getSelectedFile();
             lbPathFile.setText(file.getPath());
 
@@ -317,51 +316,44 @@ public class App extends javax.swing.JFrame {
             pathFile = file.getPath().toString();
             fileService.setPathFile(pathFile);
         }
-    }//GEN-LAST:event_btnChooseFileActionPerformed
+    }
 
     private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
-        // TODO add your handling code here:
         fileService.send();
         btnChooseFile.setEnabled(false);
         btnReadFile.setEnabled(false);
         btnPauseRead.setEnabled(true);
         btnContinueRead.setEnabled(false);
         btnCancelRead.setEnabled(true);
-    }//GEN-LAST:event_btnCancelReadActionPerformed
+    }
 
     private void btnPauseReadPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
-        // TODO add your handling code here:
         fileService.pause();
         btnChooseFile.setEnabled(false);
         btnReadFile.setEnabled(false);
         btnPauseRead.setEnabled(false);
         btnContinueRead.setEnabled(true);
         btnCancelRead.setEnabled(true);
-    }//GEN-LAST:event_btnCancelReadActionPerformed
+    }
 
     private void btnContinueReadPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
-        // TODO add your handling code here:
         fileService.resume();
         btnChooseFile.setEnabled(false);
         btnReadFile.setEnabled(false);
         btnPauseRead.setEnabled(true);
         btnContinueRead.setEnabled(false);
         btnCancelRead.setEnabled(true);
-    }//GEN-LAST:event_btnCancelReadActionPerformed
+    }
 
     private void btnCancelReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
-        // TODO add your handling code here:
         fileService.cancel();
         btnChooseFile.setEnabled(true);
         btnReadFile.setEnabled(false);
         btnPauseRead.setEnabled(false);
         btnContinueRead.setEnabled(false);
         btnCancelRead.setEnabled(false);
-    }//GEN-LAST:event_btnCancelReadActionPerformed
+    }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -387,7 +379,6 @@ public class App extends javax.swing.JFrame {
     private String pathFile;
     private volatile DefaultListModel defaultListModel;
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelRead;
     private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnContinueRead;
@@ -403,9 +394,8 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel lbPathFile;
     private javax.swing.JList<String> listMessage;
     private javax.swing.JTable tblReceiveMessage;
-    // End of variables declaration//GEN-END:variables
-    static class ColorRenderer implements ActionListener
-    {
+
+    static class ColorRenderer implements ActionListener {
         private JTable table;
         private AbstractTableModel model;
         private Map colors;
@@ -413,132 +403,105 @@ public class App extends javax.swing.JFrame {
         private Timer timer;
         private Point location;
 
-        public ColorRenderer(JTable table)
-        {
+        public ColorRenderer(JTable table) {
             this.table = table;
-            model = (AbstractTableModel)table.getModel();
+            model = (AbstractTableModel) table.getModel();
             colors = new HashMap();
             location = new Point();
         }
 
-        public void setBackground(Component c, int row, int column)
-        {
+        public void setBackground(Component c, int row, int column) {
             //  Don't override the background color of a selected cell
-
-            if ( table.isCellSelected(row, column) ) return;
+            if (table.isCellSelected(row, column)) return;
 
             //  The default render does not reset the background color
             //  that was set for the previous cell, so reset it here
-
-            if (c instanceof DefaultTableCellRenderer)
-            {
-                c.setBackground( table.getBackground() );
+            if (c instanceof DefaultTableCellRenderer) {
+                c.setBackground(table.getBackground());
             }
 
             //  Don't highlight this time
-
-            if ( !isBlinking ) return;
+            if (!isBlinking) return;
 
             //  In case columns have been reordered, convert the column number
-
             column = table.convertColumnIndexToModel(column);
 
             //  Get cell color
-
             Object key = getKey(row, column);
-            Object o = colors.get( key );
+            Object o = colors.get(key);
 
-            if (o != null)
-            {
-                c.setBackground( (Color)o );
+            if (o != null) {
+                c.setBackground((Color) o);
                 return;
             }
 
             //  Get row color
-
             key = getKey(row, -1);
-            o = colors.get( key );
+            o = colors.get(key);
 
-            if (o != null)
-            {
-                c.setBackground( (Color)o );
+            if (o != null) {
+                c.setBackground((Color) o);
                 return;
             }
 
             //  Get column color
-
             key = getKey(-1, column);
-            o = colors.get( key );
+            o = colors.get(key);
 
-            if (o != null)
-            {
-                c.setBackground( (Color)o );
+            if (o != null) {
+                c.setBackground((Color) o);
                 return;
             }
 
         }
 
-        public void setCellColor(int row, int column, Color color)
-        {
+        public void setCellColor(int row, int column, Color color) {
             Point key = new Point(row, column);
             colors.put(key, color);
         }
 
-        public void setColumnColor(int column, Color color)
-        {
+        public void setColumnColor(int column, Color color) {
             setCellColor(-1, column, color);
         }
 
-        public void setRowColor(int row, Color color)
-        {
+        public void setRowColor(int row, Color color) {
             setCellColor(row, -1, color);
         }
 
-        private Object getKey(int row, int column)
-        {
+        private Object getKey(int row, int column) {
             location.x = row;
             location.y = column;
             return location;
         }
 
-        public void startBlinking(int interval)
-        {
+        public void startBlinking(int interval) {
             timer = new Timer(interval, this);
             timer.start();
         }
 
-        public void stopBlinking()
-        {
+        public void stopBlinking() {
             timer.stop();
         }
 
-        public void actionPerformed(ActionEvent e)
-        {
+        public void actionPerformed(ActionEvent e) {
             isBlinking = !isBlinking;
 
             Iterator it = colors.keySet().iterator();
 
-            while ( it.hasNext() )
-            {
-                Point key = (Point)it.next();
+            while (it.hasNext()) {
+                Point key = (Point) it.next();
                 int row = key.x;
                 int column = key.y;
 
-                if (column == -1)
-                {
+                if (column == -1) {
                     model.fireTableRowsUpdated(row, row);
-                }
-                else if (row == -1)
-                {
+                } else if (row == -1) {
                     int rows = table.getRowCount();
 
-                    for (int i = 0; i < rows; i++)
-                    {
+                    for (int i = 0; i < rows; i++) {
                         model.fireTableCellUpdated(i, column);
                     }
-                }
-                else
-                {
+                } else {
                     model.fireTableCellUpdated(row, column);
                 }
             }
