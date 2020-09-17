@@ -1,7 +1,6 @@
 package comsumer;
 
 import kafka.KafkaService;
-import org.apache.kafka.clients.KafkaClient;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.ListConsumerGroupOffsetsResult;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -17,12 +16,11 @@ import java.util.concurrent.ExecutionException;
 
 
 public class ConsumerConfig {
-    private String group_id = String.valueOf(new Date().hashCode());
+  private String group_id = String.valueOf(new Date().hashCode());
+  public KafkaConsumer create(String topic) {
 
-    public KafkaConsumer create() {
         String bootstrapServers = "13.76.157.231:9092,20.184.4.77:9092,104.42.73.42:9092";
         String grp_id = String.valueOf(group_id);
-        String topic = "stock-info";
 
         //Creating consumer properties
         Properties properties = new Properties();
@@ -43,21 +41,21 @@ public class ConsumerConfig {
         return consumer;
     }
 
-    public void listen(KafkaConsumer consumer, App app) {
+    public void listen(KafkaConsumer consumer, App app, String topic) {
         AdminClient adminClient = (new KafkaService()).getAdminClient();
         ListConsumerGroupOffsetsResult listConsumerGroupOffsetsResult ;
         long startEachMinute = System.currentTimeMillis();
         long endEachMinute = System.currentTimeMillis();
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(0));
-            app.reRender(records);
+            app.reRender(records, topic);
             endEachMinute = System.currentTimeMillis();
             if ((endEachMinute - startEachMinute) >= 15000) {
                 listConsumerGroupOffsetsResult = adminClient.listConsumerGroupOffsets(group_id);
                 try {
                     Map<TopicPartition, OffsetAndMetadata> metadataMap = listConsumerGroupOffsetsResult.partitionsToOffsetAndMetadata().get();
                     for (Map.Entry<TopicPartition, OffsetAndMetadata> entry : metadataMap.entrySet()) {
-                        System.out.println("topic: " + entry.getKey().topic() + ", partition: " + entry.getKey().partition() +
+                        System.out.println("beggingOffsets: " +consumer.beginningOffsets(Collections.singleton(entry.getKey()))+
                                 ", offset: " + entry.getValue().offset() + ", endOffsets: " + consumer.endOffsets(Collections.singleton(entry.getKey())));
                     }
                     System.out.println("-------------------------");

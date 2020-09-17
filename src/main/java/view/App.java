@@ -7,13 +7,15 @@ import files.FileService;
 import lombok.Getter;
 import lombok.Setter;
 import model.StockInfoModel;
+import model.SubTopNPriceModel;
+import model.TopNPriceModel;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
 import javax.swing.Timer;
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -23,17 +25,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
 public class App extends javax.swing.JFrame {
     private static List<StockInfoModel> data;
+    private static List<TopNPriceModel> topNPriceModels;
     ArrayList arrCols;
     DefaultTableModel model;
+    DefaultTableModel defaultTableModelTopNPrice;
     private Map colors;
     ColorRenderer colorRenderer;
+    Gson gson;
+    private static int size = -1, temp = -1, indexChange = -1;
+    private static int size1 = -1, temp1 = -1, indexChane1 = -1;
+
     Logger logger = LoggerFactory.getLogger(App.class);
 
     private Map<Integer, String> difference(StockInfoModel s1, StockInfoModel s2) {
@@ -57,63 +65,158 @@ public class App extends javax.swing.JFrame {
         return fields;
     }
 
-    public void reRender(ConsumerRecords<String, String> records) {
-        try {
-            Gson gson = new Gson();
-            Map<Integer, String> fields = new HashMap<>();
-            int size = -1, temp = -1, indexChange = -1;
-            for (ConsumerRecord<String, String> item : records) {
-                StockInfoModel object = gson.fromJson(item.value().substring(1, item.value().length() - 1), StockInfoModel.class);
-                boolean check = false;
-                for (int i = 0; i < data.size(); i++) {
-                    if (data.get(i).getSymbol().equals(object.getSymbol())) {
-                        fields = difference(data.get(i), object);
-                        if (!fields.isEmpty()) {
-                            data.set(i, object);
-                            indexChange = i;
-                        }
-                        check = true;
-                        break;
+    private Map<Integer, String> difference(TopNPriceModel s1, TopNPriceModel s2) {
+        Map<Integer, String> fields = new HashMap<>();
+        int index = 0;
+        for (Field field : StockInfoModel.class.getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                Object os1 = field.get(s1);
+                Object os2 = field.get(s2);
+                if (os1 instanceof List && os2 instanceof List) {
+                    List<SubTopNPriceModel> l1 = (List<SubTopNPriceModel>) os1;
+                    List<SubTopNPriceModel> l2 = (List<SubTopNPriceModel>) os2;
+                    int size = Math.max(l1.size(), l2.size());
+                    for (int i = 0; i < size; i++) {
+                        if (size > 3) break;
+
+                    }
+                } else {
+                    String valueS1 = field.get(s1).toString();
+                    String valueS2 = field.get(s2).toString();
+                    if (!valueS1.equals(valueS2)) {
+                        fields.put(index, valueS2);
                     }
                 }
-                if (!check) {
-                    data.add(object);
-                    size++;
+            } catch (IllegalAccessException e) {
+                logger.error(e.getMessage());
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+            index++;
+        }
+
+        return fields;
+    }
+
+    public void stockInfo(ConsumerRecord<String, String> item) {
+        Map<Integer, String> fields = new HashMap<>();
+        StockInfoModel object = gson.fromJson(item.value().substring(1, item.value().length() - 1), StockInfoModel.class);
+        boolean check = false;
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getSymbol().equals(object.getSymbol())) {
+                fields = difference(data.get(i), object);
+                if (!fields.isEmpty()) {
+                    data.set(i, object);
+                    indexChange = i;
+                }
+                check = true;
+                break;
+            }
+        }
+        if (!check) {
+            data.add(object);
+            size++;
+        } else {
+            int finalIndexChange = indexChange;
+            fields.entrySet().stream().forEach(map -> {
+                model.setValueAt(map.getValue(), finalIndexChange, map.getKey());
+                colorRenderer.setCellColor(finalIndexChange, map.getKey(), Color.ORANGE);
+                try {
+                    Thread.sleep(10);
+                    colorRenderer.setCellColor(finalIndexChange, map.getKey(), Color.WHITE);
+                } catch (InterruptedException e) {
+                    logger.error(e.getMessage());
+                } catch (Exception e) {
+                    logger.error(e.getMessage());
+                }
+
+            });
+        }
+
+        if (size > temp) {
+            StockInfoModel stockInfoModel = data.get(size);
+            temp++;
+            Object[] objects = {
+                    stockInfoModel.getIDSymbol(),
+                    stockInfoModel.getSymbol(),
+                    stockInfoModel.getBoardCode(),
+
+                    stockInfoModel.getTradingSessionID(),
+                    stockInfoModel.getTradSecStatus(),
+                    stockInfoModel.getSecurityTradingStatus(),
+                    stockInfoModel.getListingStatus()
+            };
+            model.insertRow(model.getRowCount(), objects);
+            colorRenderer.setRowColor(model.getRowCount() - 1, Color.YELLOW);
+            //Thread.sleep(10);
+            colorRenderer.setRowColor(model.getRowCount() - 1, Color.WHITE);
+        }
+    }
+
+    private void topNPrice(ConsumerRecord<String, String> item) {
+        TopNPriceModel object = null;
+        List<Object> objectList = gson.fromJson(item.value(), (java.lang.reflect.Type) Object.class);
+        object = gson.fromJson(gson.toJsonTree(objectList.get(0)), TopNPriceModel.class);
+        if (objectList.size() > 1) {
+            for (int i = 1; i < objectList.size(); i++) {
+                SubTopNPriceModel subTopNPriceModel = null;
+                subTopNPriceModel = gson.fromJson(gson.toJsonTree(objectList.get(i)), SubTopNPriceModel.class);
+                if (subTopNPriceModel != null) object.getGroup().add(subTopNPriceModel);
+            }
+        }
+
+        Map<Integer, String> fields = new HashMap<>();
+        boolean check = false;
+        for (int i = 0; i < topNPriceModels.size(); i++) {
+            if (topNPriceModels.get(i).getSymbol().equals(object.getSymbol())) {
+
+                check = true;
+                break;
+            }
+        }
+
+        if (!check) {
+            topNPriceModels.add(object);
+            size1++;
+        }
+
+        if (size1 > temp1) {
+            TopNPriceModel topNPriceModel = topNPriceModels.get(size1);
+            temp1++;
+            int n = 3;
+            Object[] objects = new Object[18];
+            objects[0] = topNPriceModel.getSymbol();
+            objects[1] = topNPriceModel.getBoardCode();
+            objects[2] = topNPriceModel.getNoTopPrice();
+            for (int i = 0; i < topNPriceModel.getGroup().size(); i++) {
+                if (i > 3) break;
+                objects[n] = topNPriceModel.getGroup().get(i).getNumTopPrice();
+                objects[n + 1] = topNPriceModel.getGroup().get(i).getBestBidPrice();
+                objects[n + 2] = topNPriceModel.getGroup().get(i).getBestBidQtty();
+                objects[n + 3] = topNPriceModel.getGroup().get(i).getBestOfferPrice();
+                objects[n + 4] = topNPriceModel.getGroup().get(i).getBestOfferQtty();
+                n += 5;
+            }
+            defaultTableModelTopNPrice.insertRow(defaultTableModelTopNPrice.getRowCount(), objects);
+        }
+
+    }
+
+    public Object[] getObject(SubTopNPriceModel subTopNPriceModel) {
+
+        Object[] object = {};
+        return object;
+    }
+
+    public void reRender(ConsumerRecords<String, String> records, String topic) {
+        try {
+            for (ConsumerRecord<String, String> item : records) {
+                if (topic.equals("stock-info")) {
+                    stockInfo(item);
                 } else {
-                    int finalIndexChange = indexChange;
-                    fields.entrySet().stream().forEach(map -> {
-                        model.setValueAt(map.getValue(), finalIndexChange, map.getKey());
-                        colorRenderer.setCellColor(finalIndexChange, map.getKey(), Color.ORANGE);
-                        try {
-                            Thread.sleep(10);
-                            colorRenderer.setCellColor(finalIndexChange, map.getKey(), Color.WHITE);
-                        } catch (InterruptedException e) {
-                            logger.error(e.getMessage());
-                        } catch (Exception e) {
-                            logger.error(e.getMessage());
-                        }
-
-                    });
+                    topNPrice(item);
                 }
-
-                if (size > temp) {
-                    StockInfoModel stockInfoModel = data.get(size);
-                    temp++;
-                    Object[] objects = {
-                            stockInfoModel.getIDSymbol(),
-                            stockInfoModel.getSymbol(),
-                            stockInfoModel.getBoardCode(),
-                            stockInfoModel.getTradingSessionID(),
-                            stockInfoModel.getTradSecStatus(),
-                            stockInfoModel.getSecurityTradingStatus(),
-                            stockInfoModel.getListingStatus()
-                    };
-                    model.insertRow(model.getRowCount(), objects);
-                    colorRenderer.setRowColor(model.getRowCount() - 1, Color.YELLOW);
-                    //Thread.sleep(10);
-                    colorRenderer.setRowColor(model.getRowCount() - 1, Color.WHITE);
-                }
-
             }
         } catch (JsonSyntaxException | ArrayIndexOutOfBoundsException e) {
             logger.error(e.getMessage());
@@ -126,10 +229,13 @@ public class App extends javax.swing.JFrame {
         logger.info("init " + this);
         initComponents();
         data = new ArrayList<>();
+        topNPriceModels = new ArrayList<>();
         model = new DefaultTableModel();
+        defaultTableModelTopNPrice = new DefaultTableModel();
         colors = new HashMap();
         jProgressBar1.setStringPainted(true);
         fileService = new FileService(jProgressBar1, this);
+        gson = new Gson();
         initBtnClick();
 
         model.addColumn("ID chứng khoán"); //IDSymbol
@@ -149,6 +255,38 @@ public class App extends javax.swing.JFrame {
         };
         jScrollPane2.setViewportView(tblReceiveMessage);
         colorRenderer = new ColorRenderer(tblReceiveMessage);
+
+        defaultTableModelTopNPrice.addColumn("Symbol");
+        defaultTableModelTopNPrice.addColumn("BoardCode");
+
+        defaultTableModelTopNPrice.addColumn("NumTopPrice");
+        defaultTableModelTopNPrice.addColumn("BestBidPrice");
+        defaultTableModelTopNPrice.addColumn("BestBidQtty");
+        defaultTableModelTopNPrice.addColumn("BestOfferPrice");
+        defaultTableModelTopNPrice.addColumn("BestOfferQtty");
+
+        defaultTableModelTopNPrice.addColumn("NumTopPrice");
+        defaultTableModelTopNPrice.addColumn("BestBidPrice");
+        defaultTableModelTopNPrice.addColumn("BestBidQtty");
+        defaultTableModelTopNPrice.addColumn("BestOfferPrice");
+        defaultTableModelTopNPrice.addColumn("BestOfferQtty");
+
+        defaultTableModelTopNPrice.addColumn("NumTopPrice");
+        defaultTableModelTopNPrice.addColumn("BestBidPrice");
+        defaultTableModelTopNPrice.addColumn("BestBidQtty");
+        defaultTableModelTopNPrice.addColumn("BestOfferPrice");
+        defaultTableModelTopNPrice.addColumn("BestOfferQtty");
+        jTableTopNPrice = new JTable(defaultTableModelTopNPrice) {
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                colorRenderer.setBackground(component, row, column);
+                return component;
+            }
+        };
+
+        jScrollPaneTopNPrice.setViewportView(jTableTopNPrice);
+        colorRenderer = new ColorRenderer(jTableTopNPrice);
     }
 
     @SuppressWarnings("unchecked")
@@ -169,6 +307,7 @@ public class App extends javax.swing.JFrame {
         lbPathFile = new JLabel();
         jScrollPane2 = new JScrollPane();
         tblReceiveMessage = new JTable();
+        jScrollPaneTopNPrice = new JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -284,6 +423,7 @@ public class App extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblReceiveMessage);
 
         jTabbedPane1.addTab("stock-info", jScrollPane2);
+        jTabbedPane1.addTab("top-n-price", jScrollPaneTopNPrice);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -361,8 +501,16 @@ public class App extends javax.swing.JFrame {
                 app.setVisible(true);
                 app.setLocationRelativeTo(null);
 
-                ReadThread readThread = new ReadThread(app);
-                readThread.start();
+                String topic = "stock-info";
+                ReadThread readThreadSI = new ReadThread(app, topic);
+
+                topic = "top-n-price";
+                ReadThread readThreadTNP = new ReadThread(app, topic);
+
+                readThreadSI.start();
+                readThreadTNP.start();
+
+
             }
         });
     }
@@ -394,6 +542,8 @@ public class App extends javax.swing.JFrame {
     private JLabel lbPathFile;
     private JList<String> listMessage;
     private JTable tblReceiveMessage;
+    private JTable jTableTopNPrice;
+    private JScrollPane jScrollPaneTopNPrice;
 
     static class ColorRenderer implements ActionListener {
         private JTable table;

@@ -94,7 +94,7 @@ public class ReadFile extends Thread {
         jProgressBar.setString(percent + " %");
         jProgressBar.setValue((int) percent);
         try {
-          Thread.currentThread().sleep(1);
+          Thread.currentThread().sleep(0);
         } catch (InterruptedException e) {
           logger.error(e + " at " + e.getStackTrace()[0]);
         }
