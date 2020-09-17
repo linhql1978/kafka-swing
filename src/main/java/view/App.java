@@ -154,21 +154,21 @@ public class App extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listMessage = new javax.swing.JList<>();
-        btnChooseFile = new javax.swing.JButton();
-        btnReadFile = new javax.swing.JButton();
-        btnPauseRead = new javax.swing.JButton();
-        btnContinueRead = new javax.swing.JButton();
-        btnCancelRead = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        lbPathFile = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblReceiveMessage = new javax.swing.JTable();
+        jTabbedPane1 = new JTabbedPane();
+        jPanel1 = new JPanel();
+        jScrollPane1 = new JScrollPane();
+        listMessage = new JList<>();
+        btnChooseFile = new JButton();
+        btnReadFile = new JButton();
+        btnPauseRead = new JButton();
+        btnContinueRead = new JButton();
+        btnCancelRead = new JButton();
+        jProgressBar1 = new JProgressBar();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        lbPathFile = new JLabel();
+        jScrollPane2 = new JScrollPane();
+        tblReceiveMessage = new JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -283,7 +283,7 @@ public class App extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblReceiveMessage);
 
-        jTabbedPane1.addTab("Consumer", jScrollPane2);
+        jTabbedPane1.addTab("stock-info", jScrollPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -318,7 +318,7 @@ public class App extends javax.swing.JFrame {
         }
     }
 
-    private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+    private void btnReadFileActionPerformed(java.awt.event.ActionEvent evt) {
         fileService.send();
         btnChooseFile.setEnabled(false);
         btnReadFile.setEnabled(false);
@@ -327,7 +327,7 @@ public class App extends javax.swing.JFrame {
         btnCancelRead.setEnabled(true);
     }
 
-    private void btnPauseReadPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+    private void btnPauseReadPerformed(java.awt.event.ActionEvent evt) {
         fileService.pause();
         btnChooseFile.setEnabled(false);
         btnReadFile.setEnabled(false);
@@ -336,7 +336,7 @@ public class App extends javax.swing.JFrame {
         btnCancelRead.setEnabled(true);
     }
 
-    private void btnContinueReadPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+    private void btnContinueReadPerformed(java.awt.event.ActionEvent evt) {
         fileService.resume();
         btnChooseFile.setEnabled(false);
         btnReadFile.setEnabled(false);
@@ -345,7 +345,7 @@ public class App extends javax.swing.JFrame {
         btnCancelRead.setEnabled(true);
     }
 
-    private void btnCancelReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelReadActionPerformed
+    private void btnCancelReadActionPerformed(java.awt.event.ActionEvent evt) {
         fileService.cancel();
         btnChooseFile.setEnabled(true);
         btnReadFile.setEnabled(false);
@@ -379,21 +379,21 @@ public class App extends javax.swing.JFrame {
     private String pathFile;
     private volatile DefaultListModel defaultListModel;
 
-    private javax.swing.JButton btnCancelRead;
-    private javax.swing.JButton btnChooseFile;
-    private javax.swing.JButton btnContinueRead;
-    private javax.swing.JButton btnPauseRead;
-    private javax.swing.JButton btnReadFile;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lbPathFile;
-    private javax.swing.JList<String> listMessage;
-    private javax.swing.JTable tblReceiveMessage;
+    private JButton btnCancelRead;
+    private JButton btnChooseFile;
+    private JButton btnContinueRead;
+    private JButton btnPauseRead;
+    private JButton btnReadFile;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JPanel jPanel1;
+    private JProgressBar jProgressBar1;
+    private JScrollPane jScrollPane1;
+    private JScrollPane jScrollPane2;
+    private JTabbedPane jTabbedPane1;
+    private JLabel lbPathFile;
+    private JList<String> listMessage;
+    private JTable tblReceiveMessage;
 
     static class ColorRenderer implements ActionListener {
         private JTable table;
