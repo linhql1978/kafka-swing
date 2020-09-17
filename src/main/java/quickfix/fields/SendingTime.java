@@ -26,16 +26,16 @@ import java.time.LocalDateTime;
 
 public class SendingTime extends UtcTimeStampField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 52;
-	
-	public SendingTime() {
-		super(52);
-	}
+    public static final int FIELD = 52;
 
-	public SendingTime(LocalDateTime data) {
-		super(52, data, true);
-	}
-	
+    public SendingTime() {
+        super(52);
+    }
+
+    public SendingTime(LocalDateTime data) {
+        super(52, data, true);
+    }
+
 }

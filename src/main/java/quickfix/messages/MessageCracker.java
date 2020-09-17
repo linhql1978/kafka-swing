@@ -28,178 +28,178 @@ import quickfix.fields.MsgType;
 
 public class MessageCracker {
 
-	/**
-	 * Callback for quickfix.Message message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(Message message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-		throw new UnsupportedMessageType();
-	}
+    /**
+     * Callback for quickfix.Message message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(Message message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+        throw new UnsupportedMessageType();
+    }
 
-	/**
-	 * Callback for FIXHeartbeat message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(Heartbeat message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	/**
-	 * Callback for FIXLogon message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(Logon message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	/**
-	 * Callback for FIXAutionMatch message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(AutionMatch message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	/**
-	 * Callback for FIXBoardInfo message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(BoardInfo message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	/**
-	 * Callback for FIXDerivativesInfo message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(DerivativesInfo message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	/**
-	 * Callback for FIXIndex message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(Index message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	/**
-	 * Callback for FIXStock message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(Stock message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	/**
-	 * Callback for FIXStockInfo message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(StockInfo message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	/**
-	 * Callback for FIXTopNPrice message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(TopNPrice message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	/**
-	 * Callback for FIXTopPriceOddLot message.
-	 *
-	 * @param message
-	 * @param sessionID
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void onMessage(TopPriceOddLot message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-	}
-	
-	public void crack(Message message, SessionID sessionID)
-			throws UnsupportedMessageType, FieldNotFound, IncorrectTagValue {
-		crack44((Message) message, sessionID);
-	}
+    /**
+     * Callback for FIXHeartbeat message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(Heartbeat message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
 
-	/**
-	 * Cracker method for 44 messages.
-	 *
-	 * @throws FieldNotFound
-	 * @throws UnsupportedMessageType
-	 * @throws IncorrectTagValue
-	 */
-	public void crack44(Message message, SessionID sessionID)
-			throws UnsupportedMessageType, FieldNotFound, IncorrectTagValue {
+    /**
+     * Callback for FIXLogon message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(Logon message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
 
-		String type = message.getHeader().getString(MsgType.FIELD);
+    /**
+     * Callback for FIXAutionMatch message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(AutionMatch message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
 
-		if (type.equals(Heartbeat.MSGTYPE))
-			onMessage((Heartbeat)message, sessionID);
-		else if (type.equals(Logon.MSGTYPE))
-			onMessage((Logon)message, sessionID);
-		else if (type.equals(AutionMatch.MSGTYPE))
-			onMessage((AutionMatch)message, sessionID);
-		else if (type.equals(BoardInfo.MSGTYPE))
-			onMessage((BoardInfo)message, sessionID);
-		else if (type.equals(DerivativesInfo.MSGTYPE))
-			onMessage((DerivativesInfo)message, sessionID);
-		else if (type.equals(Index.MSGTYPE))
-			onMessage((Index)message, sessionID);
-		else if (type.equals(Stock.MSGTYPE))
-			onMessage((Stock)message, sessionID);
-		else if (type.equals(StockInfo.MSGTYPE))
-			onMessage((StockInfo)message, sessionID);
-		else if (type.equals(TopNPrice.MSGTYPE))
-			onMessage((TopNPrice)message, sessionID);
-		else if (type.equals(TopPriceOddLot.MSGTYPE))
-			onMessage((TopPriceOddLot)message, sessionID);
-		else
-			onMessage(message, sessionID);
-	}
+    /**
+     * Callback for FIXBoardInfo message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(BoardInfo message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
+
+    /**
+     * Callback for FIXDerivativesInfo message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(DerivativesInfo message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
+
+    /**
+     * Callback for FIXIndex message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(Index message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
+
+    /**
+     * Callback for FIXStock message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(Stock message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
+
+    /**
+     * Callback for FIXStockInfo message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(StockInfo message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
+
+    /**
+     * Callback for FIXTopNPrice message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(TopNPrice message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
+
+    /**
+     * Callback for FIXTopPriceOddLot message.
+     *
+     * @param message
+     * @param sessionID
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void onMessage(TopPriceOddLot message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    }
+
+    public void crack(Message message, SessionID sessionID)
+            throws UnsupportedMessageType, FieldNotFound, IncorrectTagValue {
+        crack44((Message) message, sessionID);
+    }
+
+    /**
+     * Cracker method for 44 messages.
+     *
+     * @throws FieldNotFound
+     * @throws UnsupportedMessageType
+     * @throws IncorrectTagValue
+     */
+    public void crack44(Message message, SessionID sessionID)
+            throws UnsupportedMessageType, FieldNotFound, IncorrectTagValue {
+
+        String type = message.getHeader().getString(MsgType.FIELD);
+
+        if (type.equals(Heartbeat.MSGTYPE))
+            onMessage((Heartbeat) message, sessionID);
+        else if (type.equals(Logon.MSGTYPE))
+            onMessage((Logon) message, sessionID);
+        else if (type.equals(AutionMatch.MSGTYPE))
+            onMessage((AutionMatch) message, sessionID);
+        else if (type.equals(BoardInfo.MSGTYPE))
+            onMessage((BoardInfo) message, sessionID);
+        else if (type.equals(DerivativesInfo.MSGTYPE))
+            onMessage((DerivativesInfo) message, sessionID);
+        else if (type.equals(Index.MSGTYPE))
+            onMessage((Index) message, sessionID);
+        else if (type.equals(Stock.MSGTYPE))
+            onMessage((Stock) message, sessionID);
+        else if (type.equals(StockInfo.MSGTYPE))
+            onMessage((StockInfo) message, sessionID);
+        else if (type.equals(TopNPrice.MSGTYPE))
+            onMessage((TopNPrice) message, sessionID);
+        else if (type.equals(TopPriceOddLot.MSGTYPE))
+            onMessage((TopPriceOddLot) message, sessionID);
+        else
+            onMessage(message, sessionID);
+    }
 
 }

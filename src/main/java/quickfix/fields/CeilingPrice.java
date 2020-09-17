@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class CeilingPrice extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 332;
-	
-	public CeilingPrice() {
-		super(332);
-	}
+    public static final int FIELD = 332;
 
-	public CeilingPrice(double data) {
-		super(332, data);
-	}
-	
+    public CeilingPrice() {
+        super(332);
+    }
+
+    public CeilingPrice(double data) {
+        super(332, data);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class FloorPrice extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 333;
-	
-	public FloorPrice() {
-		super(333);
-	}
+    public static final int FIELD = 333;
 
-	public FloorPrice(double data) {
-		super(333, data);
-	}
-	
+    public FloorPrice() {
+        super(333);
+    }
+
+    public FloorPrice(double data) {
+        super(333, data);
+    }
+
 }

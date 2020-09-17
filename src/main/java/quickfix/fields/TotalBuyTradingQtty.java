@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class TotalBuyTradingQtty extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 395;
-	
-	public TotalBuyTradingQtty() {
-		super(395);
-	}
+    public static final int FIELD = 395;
 
-	public TotalBuyTradingQtty(int data) {
-		super(395, data);
-	}
-	
+    public TotalBuyTradingQtty() {
+        super(395);
+    }
+
+    public TotalBuyTradingQtty(int data) {
+        super(395, data);
+    }
+
 }

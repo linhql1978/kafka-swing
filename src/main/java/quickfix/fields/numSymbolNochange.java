@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class numSymbolNochange extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 252;
-	
-	public numSymbolNochange() {
-		super(252);
-	}
+    public static final int FIELD = 252;
 
-	public numSymbolNochange(int data) {
-		super(252, data);
-	}
-	
+    public numSymbolNochange() {
+        super(252);
+    }
+
+    public numSymbolNochange(int data) {
+        super(252, data);
+    }
+
 }

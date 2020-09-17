@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class Symbol extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 55;
-	
-	public Symbol() {
-		super(55);
-	}
+    public static final int FIELD = 55;
 
-	public Symbol(String data) {
-		super(55, data);
-	}
-	
+    public Symbol() {
+        super(55);
+    }
+
+    public Symbol(String data) {
+        super(55, data);
+    }
+
 }

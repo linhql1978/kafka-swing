@@ -25,60 +25,60 @@ import quickfix.Message;
 
 public class MessageFactory implements quickfix.MessageFactory {
 
-	public Message create(String beginString, String msgType) {
-		
-		switch (msgType) {
-	
-			case Heartbeat.MSGTYPE:
-				return new Heartbeat();
-	
-			case Logon.MSGTYPE:
-				return new Logon();
-	
-			case AutionMatch.MSGTYPE:
-				return new AutionMatch();
-	
-			case BoardInfo.MSGTYPE:
-				return new BoardInfo();
-	
-			case DerivativesInfo.MSGTYPE:
-				return new DerivativesInfo();
-	
-			case Index.MSGTYPE:
-				return new Index();
-	
-			case Stock.MSGTYPE:
-				return new Stock();
-	
-			case StockInfo.MSGTYPE:
-				return new StockInfo();
-	
-			case TopNPrice.MSGTYPE:
-				return new TopNPrice();
-	
-			case TopPriceOddLot.MSGTYPE:
-				return new TopPriceOddLot();
-	
-		}
+    public Message create(String beginString, String msgType) {
 
-		return new quickfix.messages.Message();
-	}
+        switch (msgType) {
 
-	public Group create(String beginString, String msgType, int correspondingFieldID) {
-		
-		switch (msgType) {
-	
-			case TopNPrice.MSGTYPE:
-				switch (correspondingFieldID) {
-			
-				case quickfix.fields.NoTopPrice.FIELD:
-					return new TopNPrice.NoTopPrice();
-	
-				}
-				break;
-	
-		}
+            case Heartbeat.MSGTYPE:
+                return new Heartbeat();
 
-		return null;
-	}
+            case Logon.MSGTYPE:
+                return new Logon();
+
+            case AutionMatch.MSGTYPE:
+                return new AutionMatch();
+
+            case BoardInfo.MSGTYPE:
+                return new BoardInfo();
+
+            case DerivativesInfo.MSGTYPE:
+                return new DerivativesInfo();
+
+            case Index.MSGTYPE:
+                return new Index();
+
+            case Stock.MSGTYPE:
+                return new Stock();
+
+            case StockInfo.MSGTYPE:
+                return new StockInfo();
+
+            case TopNPrice.MSGTYPE:
+                return new TopNPrice();
+
+            case TopPriceOddLot.MSGTYPE:
+                return new TopPriceOddLot();
+
+        }
+
+        return new quickfix.messages.Message();
+    }
+
+    public Group create(String beginString, String msgType, int correspondingFieldID) {
+
+        switch (msgType) {
+
+            case TopNPrice.MSGTYPE:
+                switch (correspondingFieldID) {
+
+                    case quickfix.fields.NoTopPrice.FIELD:
+                        return new TopNPrice.NoTopPrice();
+
+                }
+                break;
+
+        }
+
+        return null;
+    }
 }

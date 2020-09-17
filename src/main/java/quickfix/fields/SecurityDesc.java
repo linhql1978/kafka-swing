@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class SecurityDesc extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 107;
-	
-	public SecurityDesc() {
-		super(107);
-	}
+    public static final int FIELD = 107;
 
-	public SecurityDesc(String data) {
-		super(107, data);
-	}
-	
+    public SecurityDesc() {
+        super(107);
+    }
+
+    public SecurityDesc(String data) {
+        super(107, data);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class AdjustQtty extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 230;
-	
-	public AdjustQtty() {
-		super(230);
-	}
+    public static final int FIELD = 230;
 
-	public AdjustQtty(int data) {
-		super(230, data);
-	}
-	
+    public AdjustQtty() {
+        super(230);
+    }
+
+    public AdjustQtty(int data) {
+        super(230, data);
+    }
+
 }

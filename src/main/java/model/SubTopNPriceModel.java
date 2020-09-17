@@ -7,6 +7,17 @@ public class SubTopNPriceModel {
     private String BestOfferPrice;
     private String BestOfferQtty;
 
+    @Override
+    public String toString() {
+        return "SubTopNPriceModel{" +
+                "NumTopPrice='" + NumTopPrice + '\'' +
+                ", BestBidPrice='" + BestBidPrice + '\'' +
+                ", BestBidQtty='" + BestBidQtty + '\'' +
+                ", BestOfferPrice='" + BestOfferPrice + '\'' +
+                ", BestOfferQtty='" + BestOfferQtty + '\'' +
+                '}';
+    }
+
     public String getNumTopPrice() {
         return NumTopPrice;
     }

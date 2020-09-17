@@ -25,16 +25,16 @@ import quickfix.CharField;
 
 public class BoardStatus extends CharField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 426;
-	
-	public BoardStatus() {
-		super(426);
-	}
+    public static final int FIELD = 426;
 
-	public BoardStatus(char data) {
-		super(426, data);
-	}
-	
+    public BoardStatus() {
+        super(426);
+    }
+
+    public BoardStatus(char data) {
+        super(426, data);
+    }
+
 }
