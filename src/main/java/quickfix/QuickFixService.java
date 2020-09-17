@@ -31,7 +31,6 @@ public class QuickFixService {
   }
 
   public String convert(String str) {
-    boolean check = false;
     try {
       str += ("10=" + MessageUtils.checksum(str) + "\u0001");
       Message message = (Message) MessageUtils.parse(new MessageFactory(), dataDictionary, str);
@@ -41,10 +40,6 @@ public class QuickFixService {
       while (iterator.hasNext()) {
         Field<?> field = iterator.next();
         jsonObject.addProperty(dataDictionary.getFieldName(field.getField()) != null ? dataDictionary.getFieldName(field.getField()) : "" + field.getTag() + "", (String) field.getObject());
-        if (((String) field.getObject()).equals("VET") && dataDictionary.getFieldName(field.getField()).equals("Symbol")) {
-          // if Symbol=VET
-          check = true;
-        }
       }
       listJsonData.add(jsonObject);
       Iterator<Integer> iteratorKeys = message.groupKeyIterator();
@@ -61,7 +56,7 @@ public class QuickFixService {
           listJsonData.add(jsonObject);
         }
       }
-      if (((Message.Header) message.getHeader()).getMsgType().getObject().equals(StockInfo.MSGTYPE) && check) {
+      if (((Message.Header) message.getHeader()).getMsgType().getObject().equals(StockInfo.MSGTYPE) ) {
           return gson.toJson(listJsonData);
       }
     } catch (InvalidMessage | FieldNotFound | NoClassDefFoundError invalidMessage) {
