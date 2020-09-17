@@ -12,10 +12,9 @@ import java.util.Properties;
 
 
 public class ConsumerConfig {
-    public KafkaConsumer create() {
+    public KafkaConsumer create(String topic) {
         String bootstrapServers = "13.76.157.231:9092,20.184.4.77:9092,104.42.73.42:9092";
         String grp_id = String.valueOf((new Date().hashCode()));
-        String topic = "stock-info";
 
         //Creating consumer properties
         Properties properties = new Properties();
@@ -36,10 +35,10 @@ public class ConsumerConfig {
         return consumer;
     }
 
-    public void listen(KafkaConsumer consumer, App app) {
+    public void listen(KafkaConsumer consumer, App app, String topic) {
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(0));
-            app.reRender(records);
+            app.reRender(records, topic);
         }
     }
 }
