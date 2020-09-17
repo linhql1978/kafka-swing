@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import quickfix.messages.Message;
 import quickfix.messages.MessageFactory;
-import quickfix.messages.StockInfo;
-import quickfix.messages.TopNPrice;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,7 +39,29 @@ public class QuickFixService {
       String msgType = ((Message.Header) message.getHeader()).getMsgType().getValue();
       if (kafkaConstant.getMapTopicName().containsKey(msgType)) {
         KafkaConstant.TOPIC_NAME = kafkaConstant.getMapTopicName().get(msgType);
-        return gson.toJson(message);
+        List<JsonObject> listJsonData = new ArrayList<>();
+        JsonObject jsonObject = new JsonObject();
+        Iterator<Field<?>> iterator = message.iterator();
+        while (iterator.hasNext()) {
+          Field<?> field = iterator.next();
+          jsonObject.addProperty(dataDictionary.getFieldName(field.getField()) != null ? dataDictionary.getFieldName(field.getField()) : "" + field.getTag() + "", (String) field.getObject());
+        }
+        listJsonData.add(jsonObject);
+        Iterator<Integer> iteratorKeys = message.groupKeyIterator();
+        int key;
+        while (iteratorKeys.hasNext()) {
+          key = iteratorKeys.next();
+          for (Group group : message.getGroups(key)) {
+            iterator = group.iterator();
+            jsonObject = new JsonObject();
+            while (iterator.hasNext()) {
+              Field<?> field = iterator.next();
+              jsonObject.addProperty(dataDictionary.getFieldName(field.getField()) != null ? dataDictionary.getFieldName(field.getField()) : "" + field.getTag() + "", (String) field.getObject());
+            }
+            listJsonData.add(jsonObject);
+          }
+        }
+        return gson.toJson(listJsonData);
       }
     } catch (InvalidMessage | NoClassDefFoundError invalidMessage) {
       logger.info(invalidMessage + " at " + invalidMessage.getStackTrace()[0]);
