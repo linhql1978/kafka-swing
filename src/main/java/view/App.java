@@ -112,7 +112,7 @@ public class App extends javax.swing.JFrame {
         model.setValueAt(map.getValue(), finalIndexChange, map.getKey());
         colorRenderer.setCellColor(finalIndexChange, map.getKey(), Color.ORANGE);
         try {
-          Thread.sleep(10);
+          Thread.sleep(5);
           colorRenderer.setCellColor(finalIndexChange, map.getKey(), Color.WHITE);
         } catch (InterruptedException e) {
           logger.error(e.getMessage());
