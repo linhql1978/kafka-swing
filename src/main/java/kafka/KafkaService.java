@@ -1,5 +1,7 @@
 package kafka;
 
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -22,5 +24,12 @@ public class KafkaService {
         KafkaProducer kafkaProducer = new KafkaProducer<String, String>(producerConfig);
         logger.info("Create KafkaProducer: " + kafkaProducer);
         return kafkaProducer;
+    }
+
+    public AdminClient getAdminClient() {
+        Properties props = new Properties();
+        props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstant.KAFKA_BROKER);
+        AdminClient adminClient = AdminClient.create(props);
+        return adminClient;
     }
 }

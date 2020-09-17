@@ -654,4 +654,10 @@ public class App extends javax.swing.JFrame {
             }
         }
     }
+
+    public synchronized void updateListMessage(List<String> stringList) {
+        for (String str : stringList) {
+            ((DefaultListModel) listMessage.getModel()).addElement(str);
+        }
+    }
 }
