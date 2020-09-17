@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class PriorIndexVal extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 23;
-	
-	public PriorIndexVal() {
-		super(23);
-	}
+    public static final int FIELD = 23;
 
-	public PriorIndexVal(double data) {
-		super(23, data);
-	}
-	
+    public PriorIndexVal() {
+        super(23);
+    }
+
+    public PriorIndexVal(double data) {
+        super(23, data);
+    }
+
 }

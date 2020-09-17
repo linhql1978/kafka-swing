@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class BuyCount extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 3951;
-	
-	public BuyCount() {
-		super(3951);
-	}
+    public static final int FIELD = 3951;
 
-	public BuyCount(String data) {
-		super(3951, data);
-	}
-	
+    public BuyCount() {
+        super(3951);
+    }
+
+    public BuyCount(String data) {
+        super(3951, data);
+    }
+
 }

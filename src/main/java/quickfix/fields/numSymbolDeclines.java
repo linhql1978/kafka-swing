@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class numSymbolDeclines extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 253;
-	
-	public numSymbolDeclines() {
-		super(253);
-	}
+    public static final int FIELD = 253;
 
-	public numSymbolDeclines(int data) {
-		super(253, data);
-	}
-	
+    public numSymbolDeclines() {
+        super(253);
+    }
+
+    public numSymbolDeclines(int data) {
+        super(253, data);
+    }
+
 }

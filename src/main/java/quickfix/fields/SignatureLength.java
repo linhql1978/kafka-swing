@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class SignatureLength extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 93;
-	
-	public SignatureLength() {
-		super(93);
-	}
+    public static final int FIELD = 93;
 
-	public SignatureLength(int data) {
-		super(93, data);
-	}
-	
+    public SignatureLength() {
+        super(93);
+    }
+
+    public SignatureLength(int data) {
+        super(93, data);
+    }
+
 }

@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class IDIndex extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 1;
-	
-	public IDIndex() {
-		super(1);
-	}
+    public static final int FIELD = 1;
 
-	public IDIndex(int data) {
-		super(1, data);
-	}
-	
+    public IDIndex() {
+        super(1);
+    }
+
+    public IDIndex(int data) {
+        super(1, data);
+    }
+
 }

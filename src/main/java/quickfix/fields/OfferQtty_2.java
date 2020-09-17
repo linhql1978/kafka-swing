@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class OfferQtty_2 extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 1361;
-	
-	public OfferQtty_2() {
-		super(1361);
-	}
+    public static final int FIELD = 1361;
 
-	public OfferQtty_2(String data) {
-		super(1361, data);
-	}
-	
+    public OfferQtty_2() {
+        super(1361);
+    }
+
+    public OfferQtty_2(String data) {
+        super(1361, data);
+    }
+
 }

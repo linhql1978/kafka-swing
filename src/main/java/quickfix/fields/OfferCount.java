@@ -25,16 +25,16 @@ import quickfix.DoubleField;
 
 public class OfferCount extends DoubleField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 320;
-	
-	public OfferCount() {
-		super(320);
-	}
+    public static final int FIELD = 320;
 
-	public OfferCount(double data) {
-		super(320, data);
-	}
-	
+    public OfferCount() {
+        super(320);
+    }
+
+    public OfferCount(double data) {
+        super(320, data);
+    }
+
 }

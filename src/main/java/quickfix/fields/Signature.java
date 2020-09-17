@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class Signature extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 89;
-	
-	public Signature() {
-		super(89);
-	}
+    public static final int FIELD = 89;
 
-	public Signature(String data) {
-		super(89, data);
-	}
-	
+    public Signature() {
+        super(89);
+    }
+
+    public Signature(String data) {
+        super(89, data);
+    }
+
 }

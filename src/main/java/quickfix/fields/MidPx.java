@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class MidPx extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 631;
-	
-	public MidPx() {
-		super(631);
-	}
+    public static final int FIELD = 631;
 
-	public MidPx(int data) {
-		super(631, data);
-	}
-	
+    public MidPx() {
+        super(631);
+    }
+
+    public MidPx(int data) {
+        super(631, data);
+    }
+
 }

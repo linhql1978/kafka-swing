@@ -25,26 +25,26 @@ import quickfix.StringField;
 
 public class MsgType extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 35;
-	public static final String HEARTBEAT = "0";
-	public static final String AUTIONMATCH = "EP";
-	public static final String BOARDINFO = "BI";
-	public static final String DERIVATIVESINFO = "DI";
-	public static final String INDEX = "I";
-	public static final String STOCK = "S";
-	public static final String STOCKINFO = "SI";
-	public static final String TOPNPRICE = "TP";
-	public static final String TOPPRICEODDLOT = "PO";
-	public static final String LOGON = "A";
-	
-	public MsgType() {
-		super(35);
-	}
+    public static final int FIELD = 35;
+    public static final String HEARTBEAT = "0";
+    public static final String AUTIONMATCH = "EP";
+    public static final String BOARDINFO = "BI";
+    public static final String DERIVATIVESINFO = "DI";
+    public static final String INDEX = "I";
+    public static final String STOCK = "S";
+    public static final String STOCKINFO = "SI";
+    public static final String TOPNPRICE = "TP";
+    public static final String TOPPRICEODDLOT = "PO";
+    public static final String LOGON = "A";
 
-	public MsgType(String data) {
-		super(35, data);
-	}
-	
+    public MsgType() {
+        super(35);
+    }
+
+    public MsgType(String data) {
+        super(35, data);
+    }
+
 }

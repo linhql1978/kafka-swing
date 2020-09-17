@@ -25,16 +25,16 @@ import quickfix.StringField;
 
 public class IndexCode extends StringField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 2;
-	
-	public IndexCode() {
-		super(2);
-	}
+    public static final int FIELD = 2;
 
-	public IndexCode(String data) {
-		super(2, data);
-	}
-	
+    public IndexCode() {
+        super(2);
+    }
+
+    public IndexCode(String data) {
+        super(2, data);
+    }
+
 }

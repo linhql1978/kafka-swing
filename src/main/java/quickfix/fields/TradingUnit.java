@@ -25,16 +25,16 @@ import quickfix.IntField;
 
 public class TradingUnit extends IntField {
 
-	static final long serialVersionUID = 20050617;
+    static final long serialVersionUID = 20050617;
 
-	public static final int FIELD = 400;
-	
-	public TradingUnit() {
-		super(400);
-	}
+    public static final int FIELD = 400;
 
-	public TradingUnit(int data) {
-		super(400, data);
-	}
-	
+    public TradingUnit() {
+        super(400);
+    }
+
+    public TradingUnit(int data) {
+        super(400, data);
+    }
+
 }
