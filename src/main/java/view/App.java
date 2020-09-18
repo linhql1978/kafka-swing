@@ -184,17 +184,21 @@ public class App extends javax.swing.JFrame {
             Thread.sleep(5);
             colorRenderer.setCellColor(topNPriceMapIndex.get(key), i, Color.WHITE);
           } catch (InterruptedException e) {
-            logger.error(e+": "+e.getMessage());
+            logger.error(e + ": " + e.getMessage());
           } catch (Exception e) {
-            logger.error(e+": "+e.getMessage());
+            logger.error(e + ": " + e.getMessage());
           }
         }
       }
       topNPriceMap.put(key, topNprice);
     } else {
-      topNPriceMap.put(key, topNprice);
-      defaultTableModelTopNPrice.insertRow(defaultTableModelTopNPrice.getRowCount(), topNPriceMap.get(key).toArray());
-      topNPriceMapIndex.put(key, defaultTableModelTopNPrice.getRowCount() - 1);
+      try {
+        topNPriceMap.put(key, topNprice);
+        defaultTableModelTopNPrice.insertRow(defaultTableModelTopNPrice.getRowCount(), topNPriceMap.get(key).toArray());
+        topNPriceMapIndex.put(key, defaultTableModelTopNPrice.getRowCount() - 1);
+      } catch (Exception e) {
+        logger.error(e.getMessage());
+      }
     }
   }
 
@@ -208,7 +212,7 @@ public class App extends javax.swing.JFrame {
         }
       }
     } catch (JsonSyntaxException | ArrayIndexOutOfBoundsException e) {
-      logger.error(e+" at "+e.getStackTrace()[0]);
+      logger.error(e + " at " + e.getStackTrace()[0]);
     } catch (Exception e) {
       logger.error(e + " at " + e.getStackTrace()[0]);
     }
