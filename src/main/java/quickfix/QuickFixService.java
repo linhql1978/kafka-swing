@@ -44,7 +44,7 @@ public class QuickFixService {
         Iterator<Field<?>> iterator = message.iterator();
         while (iterator.hasNext()) {
           Field<?> field = iterator.next();
-          jsonObject.addProperty(dataDictionary.getFieldName(field.getField()) != null ? dataDictionary.getFieldName(field.getField()) : "" + field.getTag() + "", (String) field.getObject());
+          jsonObject.addProperty(dataDictionary.getFieldName(field.getField()) != null ? dataDictionary.getFieldName(field.getField()) : "" + field.getTag() + "", (String) (field.getObject() != null ? field.getObject() : ""));
         }
         listJsonData.add(jsonObject);
         Iterator<Integer> iteratorKeys = message.groupKeyIterator();
@@ -56,7 +56,7 @@ public class QuickFixService {
             jsonObject = new JsonObject();
             while (iterator.hasNext()) {
               Field<?> field = iterator.next();
-              jsonObject.addProperty(dataDictionary.getFieldName(field.getField()) != null ? dataDictionary.getFieldName(field.getField()) : "" + field.getTag() + "", (String) field.getObject());
+              jsonObject.addProperty(dataDictionary.getFieldName(field.getField()) != null ? dataDictionary.getFieldName(field.getField()) : "" + field.getTag() + "", (String) (field.getObject() != null ? field.getObject() : ""));
             }
             listJsonData.add(jsonObject);
           }

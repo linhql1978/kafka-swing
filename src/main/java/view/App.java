@@ -54,8 +54,8 @@ public class App extends javax.swing.JFrame {
     for (Field field : StockInfoModel.class.getDeclaredFields()) {
       field.setAccessible(true);
       try {
-        String valueS1 = field.get(s1).toString();
-        String valueS2 = field.get(s2).toString();
+        String valueS1 = field.get(s1) != null ? field.get(s1).toString() : "";
+        String valueS2 = field.get(s2) != null ? field.get(s2).toString() : "";
         if (!valueS1.equals(valueS2)) {
           fields.put(index, valueS2);
         }
@@ -143,28 +143,26 @@ public class App extends javax.swing.JFrame {
   }
 
   private void topNPrice(ConsumerRecord<String, String> item) {
-    TopNPriceModel object = null;
     List<Object> objectList = gson.fromJson(item.value(), (java.lang.reflect.Type) Object.class);
-    object = gson.fromJson(gson.toJsonTree(objectList.get(0)), TopNPriceModel.class);
+    TopNPriceModel object = gson.fromJson(gson.toJsonTree(objectList.get(0)), TopNPriceModel.class);
     if (objectList.size() > 1) {
       for (int i = 1; i < objectList.size(); i++) {
-        SubTopNPriceModel subTopNPriceModel = null;
-        subTopNPriceModel = gson.fromJson(gson.toJsonTree(objectList.get(i)), SubTopNPriceModel.class);
+        SubTopNPriceModel subTopNPriceModel = gson.fromJson(gson.toJsonTree(objectList.get(i)), SubTopNPriceModel.class);
         if (subTopNPriceModel != null) object.getGroup().add(subTopNPriceModel);
       }
     }
 
     List<String> topNprice = new ArrayList<>();
-    topNprice.add(object.getSymbol());
-    topNprice.add(object.getBoardCode());
-    topNprice.add(object.getNoTopPrice());
+    topNprice.add(object.getSymbol() != null ? object.getSymbol() : "");
+    topNprice.add(object.getBoardCode() != null ? object.getBoardCode() : "");
+    topNprice.add(object.getNoTopPrice() != null ? object.getNoTopPrice() : "");
 
     for (int i = 0; i < 3; i++) {
       if (i < object.getGroup().size()) {
         topNprice.add(object.getGroup().get(i).getNumTopPrice() != null ? object.getGroup().get(i).getNumTopPrice() : "");
-        topNprice.add(object.getGroup().get(i).getBestBidQtty() != null ? object.getGroup().get(i).getBestBidPrice() : "");
-        topNprice.add(object.getGroup().get(i).getBestOfferPrice() != null ? object.getGroup().get(i).getBestBidQtty() : "");
-        topNprice.add(object.getGroup().get(i).getBestBidPrice() != null ? object.getGroup().get(i).getBestOfferPrice() : "");
+        topNprice.add(object.getGroup().get(i).getBestBidPrice() != null ? object.getGroup().get(i).getBestBidPrice() : "");
+        topNprice.add(object.getGroup().get(i).getBestBidQtty() != null ? object.getGroup().get(i).getBestBidQtty() : "");
+        topNprice.add(object.getGroup().get(i).getBestOfferPrice() != null ? object.getGroup().get(i).getBestOfferPrice() : "");
         topNprice.add(object.getGroup().get(i).getBestOfferQtty() != null ? object.getGroup().get(i).getBestOfferQtty() : "");
       } else {
         topNprice.add("");
@@ -186,9 +184,9 @@ public class App extends javax.swing.JFrame {
             Thread.sleep(5);
             colorRenderer.setCellColor(topNPriceMapIndex.get(key), i, Color.WHITE);
           } catch (InterruptedException e) {
-            logger.error(e.getMessage());
+            logger.error(e+": "+e.getMessage());
           } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error(e+": "+e.getMessage());
           }
         }
       }
@@ -210,9 +208,9 @@ public class App extends javax.swing.JFrame {
         }
       }
     } catch (JsonSyntaxException | ArrayIndexOutOfBoundsException e) {
-      logger.error(e.getMessage());
+      logger.error(e+" at "+e.getStackTrace()[0]);
     } catch (Exception e) {
-      logger.error(e.getMessage());
+      logger.error(e + " at " + e.getStackTrace()[0]);
     }
   }
 
